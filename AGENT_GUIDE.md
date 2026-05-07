@@ -64,6 +64,14 @@ run = create_run(title="<topic>", mode="idea"|"viral_dna", voice="josh", film_pr
    - Scene breakdown → save to `outputs/<run_id>/scenes.json`
 4. Update state for all three stages
 
+### Step 3b: Write Medium Article
+1. Read `skills/article-writer.md`
+2. Read `outputs/<run_id>/script.md` and `outputs/<run_id>/scenes.json`
+3. Write the Medium article and image prompts:
+   - Article → save to `outputs/<run_id>/article.md`
+   - Image prompts → save to `outputs/<run_id>/article_images.json`
+4. Update state: `update_stage(run_id, "article", "complete")`
+
 ### Step 4: Generate TTS
 ```bash
 PYTHONPATH=/Users/psrmanju2/psr_workspace/idea-to-long-viral-static-broll python3 -m lib.pipeline --stage tts --run-id <RUN_ID>
@@ -75,9 +83,13 @@ Timeout: 10+ minutes. Do NOT let local timeout kill this.
 PYTHONPATH=/Users/psrmanju2/psr_workspace/idea-to-long-viral-static-broll python3 -m lib.pipeline --stage timestamps --run-id <RUN_ID>
 ```
 
-### Step 6: Generate B-Roll Images
+### Step 6: Generate B-Roll Images + Article Images
+Run both in parallel (background):
 ```bash
-PYTHONPATH=/Users/psrmanju2/psr_workspace/idea-to-long-viral-static-broll python3 -m lib.pipeline --stage images --run-id <RUN_ID>
+# B-roll images
+python -m lib.pipeline --stage images --run-id <RUN_ID>
+# Article images (cover + inline)
+python -m lib.pipeline --stage article_images --run-id <RUN_ID>
 ```
 Timeout: 10+ minutes per batch. Do NOT let local timeout kill this.
 
@@ -90,6 +102,11 @@ Timeout: 10+ minutes. Do NOT let local timeout kill this.
 ### Step 8: Output
 Final deliverables in `outputs/<run_id>/`:
 - `final.mp4` — the rendered video
-- `scenes.json` — full scene data (includes thumbnail_prompt, title, description, tags)
+- `thumbnail.png` — YouTube thumbnail
+- `metadata.txt` / `metadata.json` — title, description, tags
+- `article.md` — Medium article (ready to paste)
+- `article_images/cover.png` — Medium cover image
+- `article_images/section_*.png` — inline article images
+- `scenes.json` — full scene data
 
-Report the final video path to the user.
+Report all output paths to the user.

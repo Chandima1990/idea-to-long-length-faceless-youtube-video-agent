@@ -237,6 +237,40 @@ def stage_upload(run_id: str):
     print(f"[UPLOAD] Done: {url}")
 
 
+def stage_article_images(run_id: str):
+    run = load_run(run_id)
+    output_dir = Path(run["output_dir"])
+    article_images_json = output_dir / "article_images.json"
+    article_images_dir = output_dir / "article_images"
+
+    if not article_images_json.exists():
+        print("ERROR: article_images.json not found. Run article stage first.")
+        sys.exit(1)
+
+    data = json.loads(article_images_json.read_text(encoding='utf-8'))
+    style_path = output_dir / "style.json"
+    style_suffix = ""
+    if style_path.exists():
+        style_suffix = json.loads(style_path.read_text(encoding='utf-8')).get("style_suffix", "")
+
+    article_images_dir.mkdir(parents=True, exist_ok=True)
+    prompts = []
+
+    cover = data.get("cover")
+    if cover:
+        prompts.append({"prompt": f"{cover['prompt']} {style_suffix}".strip(), "filename": cover["filename"]})
+
+    for img in data.get("inline", []):
+        prompts.append({"prompt": f"{img['prompt']} {style_suffix}".strip(), "filename": img["filename"]})
+
+    total = len(prompts)
+    print(f"[ARTICLE IMAGES] Generating {total} images (1 cover + {total - 1} inline)...")
+    update_stage(run_id, "article_images", "in_progress")
+    generate_images_batch(prompts, article_images_dir)
+    update_stage(run_id, "article_images", "complete", str(article_images_dir))
+    print(f"[ARTICLE IMAGES] Done: {article_images_dir}")
+
+
 def stage_viral_dna(run_id: str, youtube_url: str):
     run = load_run(run_id)
     output_dir = Path(run["output_dir"])
@@ -257,6 +291,7 @@ STAGE_MAP = {
     "render": stage_render,
     "thumbnail": stage_thumbnail,
     "metadata": stage_metadata,
+    "article_images": stage_article_images,
     "upload": stage_upload,
 }
 

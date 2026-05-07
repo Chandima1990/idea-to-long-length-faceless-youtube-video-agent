@@ -35,6 +35,8 @@ def create_run(title: str, mode: str, voice: str, film_preset: str, duration_min
             "render": {"status": "pending"},
             "thumbnail": {"status": "pending"},
             "metadata": {"status": "pending"},
+            "article": {"status": "pending"},
+            "article_images": {"status": "pending"},
             "upload": {"status": "pending"},
         },
         "output_dir": str(output_dir),
