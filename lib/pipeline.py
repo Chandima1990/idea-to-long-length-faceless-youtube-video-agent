@@ -2,10 +2,10 @@ import json
 import sys
 from pathlib import Path
 
-from lib.config import OUTPUTS_DIR
+from lib.config import OUTPUTS_DIR, YOUTUBE_CLIENT_ID
 from lib.state import create_run, load_run, update_stage
 from lib.gathos_client import generate_tts
-from lib.gemini_client import generate_images_batch
+from lib.gemini_client import generate_image, generate_images_batch
 from lib.deepgram_client import save_word_timestamps
 from lib.transcript import download_youtube, transcribe_video
 
@@ -103,6 +103,98 @@ def stage_render(run_id: str):
     print(f"[RENDER] Done: {final_path}")
 
 
+def stage_thumbnail(run_id: str):
+    run = load_run(run_id)
+    output_dir = Path(run["output_dir"])
+    scenes_path = output_dir / "scenes.json"
+    style_path = output_dir / "style.json"
+    thumbnail_path = output_dir / "thumbnail.png"
+
+    if not scenes_path.exists():
+        print("ERROR: scenes.json not found. Run scenes stage first.")
+        sys.exit(1)
+
+    scenes_data = json.loads(scenes_path.read_text(encoding='utf-8'))
+    raw_prompt = scenes_data.get("thumbnail_prompt", "")
+
+    style_suffix = ""
+    if style_path.exists():
+        style_suffix = json.loads(style_path.read_text(encoding='utf-8')).get("style_suffix", "")
+
+    prompt = f"{raw_prompt} {style_suffix}".strip()
+
+    print("[THUMBNAIL] Generating thumbnail image...")
+    update_stage(run_id, "thumbnail", "in_progress")
+    generate_image(prompt, thumbnail_path)
+    update_stage(run_id, "thumbnail", "complete", str(thumbnail_path))
+    print(f"[THUMBNAIL] Done: {thumbnail_path}")
+
+
+def stage_metadata(run_id: str):
+    run = load_run(run_id)
+    output_dir = Path(run["output_dir"])
+    scenes_path = output_dir / "scenes.json"
+
+    if not scenes_path.exists():
+        print("ERROR: scenes.json not found. Run scenes stage first.")
+        sys.exit(1)
+
+    scenes_data = json.loads(scenes_path.read_text(encoding='utf-8'))
+    title = scenes_data.get("title", "")
+    description = scenes_data.get("description", "")
+    tags = scenes_data.get("tags", [])
+    tags_str = ", ".join(tags)
+
+    metadata_txt = output_dir / "metadata.txt"
+    metadata_json = output_dir / "metadata.json"
+
+    metadata_txt.write_text(
+        f"TITLE:\n{title}\n\nDESCRIPTION:\n{description}\n\nTAGS:\n{tags_str}\n",
+        encoding='utf-8'
+    )
+    metadata_json.write_text(
+        json.dumps({"title": title, "description": description, "tags": tags}, indent=2, ensure_ascii=False),
+        encoding='utf-8'
+    )
+
+    update_stage(run_id, "metadata", "complete", str(metadata_txt))
+    print(f"[METADATA] Done: {metadata_txt}")
+    print(f"  Title:       {title}")
+    print(f"  Description: {description[:80]}...")
+    print(f"  Tags:        {tags_str[:80]}...")
+
+
+def stage_upload(run_id: str):
+    if not YOUTUBE_CLIENT_ID:
+        print("[UPLOAD] Skipped — YOUTUBE_CLIENT_ID not set in .env")
+        update_stage(run_id, "upload", "skipped")
+        return
+
+    from lib.youtube_client import upload_video
+
+    run = load_run(run_id)
+    output_dir = Path(run["output_dir"])
+    final_path = output_dir / "final.mp4"
+    scenes_path = output_dir / "scenes.json"
+
+    if not final_path.exists():
+        print("ERROR: final.mp4 not found. Run render stage first.")
+        sys.exit(1)
+
+    scenes_data = json.loads(scenes_path.read_text(encoding='utf-8'))
+    title = scenes_data.get("title", run_id)
+    description = scenes_data.get("description", "")
+    tags = scenes_data.get("tags", [])
+
+    print(f"[UPLOAD] Uploading to YouTube as private draft...")
+    print(f"  Title: {title}")
+    update_stage(run_id, "upload", "in_progress")
+    video_id = upload_video(final_path, title, description, tags, privacy="private")
+    url = f"https://youtu.be/{video_id}"
+    update_stage(run_id, "upload", "complete", url)
+    print(f"[UPLOAD] Done: {url}")
+
+
 def stage_viral_dna(run_id: str, youtube_url: str):
     run = load_run(run_id)
     output_dir = Path(run["output_dir"])
@@ -121,6 +213,9 @@ STAGE_MAP = {
     "timestamps": stage_timestamps,
     "images": stage_images,
     "render": stage_render,
+    "thumbnail": stage_thumbnail,
+    "metadata": stage_metadata,
+    "upload": stage_upload,
 }
 
 

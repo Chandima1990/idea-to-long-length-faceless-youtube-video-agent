@@ -35,6 +35,11 @@ GEMINI_IMAGE_MODEL = os.getenv("GEMINI_IMAGE_MODEL", "gemini-3.1-flash-image-pre
 DEEPGRAM_API_KEY = os.getenv("DEEPGRAM_API_KEY", "")
 DEEPGRAM_MODEL = "nova-3"
 
+# YouTube upload (optional — leave blank to skip)
+YOUTUBE_CLIENT_ID = os.getenv("YOUTUBE_CLIENT_ID", "")
+YOUTUBE_CLIENT_SECRET = os.getenv("YOUTUBE_CLIENT_SECRET", "")
+YOUTUBE_REFRESH_TOKEN = os.getenv("YOUTUBE_REFRESH_TOKEN", "")
+
 # TTS voices
 PRESET_VOICES = ["josh", "koko", "pixxy", "prof", "rochie", "spraky"]
 DEFAULT_VOICE = "josh"

@@ -33,6 +33,9 @@ def create_run(title: str, mode: str, voice: str, film_preset: str, duration_min
             "timestamps": {"status": "pending"},
             "images": {"status": "pending"},
             "render": {"status": "pending"},
+            "thumbnail": {"status": "pending"},
+            "metadata": {"status": "pending"},
+            "upload": {"status": "pending"},
         },
         "output_dir": str(output_dir),
     }
@@ -50,6 +53,8 @@ def load_run(run_id: str) -> dict:
 
 def update_stage(run_id: str, stage: str, status: str, output: str = "") -> dict:
     run = load_run(run_id)
+    if stage not in run["stages"]:
+        run["stages"][stage] = {}
     run["stages"][stage]["status"] = status
     if output:
         run["stages"][stage]["output"] = output

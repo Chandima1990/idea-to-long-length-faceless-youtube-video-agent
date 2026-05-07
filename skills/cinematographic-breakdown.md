@@ -122,7 +122,7 @@ Save to `outputs/<run_id>/scenes.json`:
   "title": "video title",
   "description": "YouTube description (2-3 sentences + keywords)",
   "tags": ["tag1", "tag2"],
-  "thumbnail_prompt": "dramatic wide shot that captures the video's essence, with title text baked in",
+  "thumbnail_prompt": "YouTube thumbnail, 16:9. Cartoon animated bald overweight man with glasses showing shocked/worried expression, bold black outlines, flat Family-Guy-style cartoon. Character on the right side. Left side: large bold white text on dark red background with the video's key hook (2-4 words, ALL CAPS). Center: simple flat cartoon graphic illustrating the video's core concept (chart, icon, dollar sign, etc.). Dark charcoal background, high-contrast yellow and red accents, bold black outlines on all elements, flat 2D cartoon style, no gradients, no photorealism.",
   "total_scenes": 60,
   "total_duration_seconds": 600,
   "scenes": [...]

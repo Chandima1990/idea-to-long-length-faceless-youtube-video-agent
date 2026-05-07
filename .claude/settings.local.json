@@ -8,7 +8,13 @@
       "WebFetch(domain:ai.google.dev)",
       "WebFetch(domain:deepgram.com)",
       "WebFetch(domain:elevenlabs.io)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(PYTHONPATH=\"C:\\\\Users\\\\emcc1\\\\Downloads\\\\Repos\\\\remotion videos\\\\YashAiGuy\\\\idea-to-long-length-faceless-youtube-video-agent\" venv/Scripts/python.exe -m lib.pipeline --stage viral_dna --run-id 2026-05-07_092555_viral-dna-temp --youtube-url \"https://www.youtube.com/watch?v=7Bi41hjcB_4\")",
+      "Bash(venv/Scripts/python.exe gen_scenes.py)",
+      "Bash(PYTHONPATH=\"C:\\\\Users\\\\emcc1\\\\Downloads\\\\Repos\\\\remotion videos\\\\YashAiGuy\\\\idea-to-long-length-faceless-youtube-video-agent\" venv/Scripts/python.exe -m lib.pipeline --stage tts --run-id 2026-05-07_093140_what-nobody-tells-you-about-your-401k)",
+      "Bash(PYTHONPATH=\"C:\\\\Users\\\\emcc1\\\\Downloads\\\\Repos\\\\remotion videos\\\\YashAiGuy\\\\idea-to-long-length-faceless-youtube-video-agent\" venv/Scripts/python.exe -m lib.pipeline --stage images --run-id 2026-05-07_093140_what-nobody-tells-you-about-your-401k)",
+      "Bash(node render.mjs ../outputs/2026-05-07_093140_what-nobody-tells-you-about-your-401k vector_infographic ../outputs/2026-05-07_093140_what-nobody-tells-you-about-your-401k/final.mp4)",
+      "Bash(venv\\\\Scripts\\\\python.exe -m lib.pipeline --stage thumbnail --run-id 2026-05-07_093140_what-nobody-tells-you-about-your-401k)"
     ]
   }
 }
