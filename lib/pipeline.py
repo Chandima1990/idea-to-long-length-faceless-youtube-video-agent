@@ -1,4 +1,5 @@
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -8,6 +9,44 @@ from lib.gathos_client import generate_tts
 from lib.gemini_client import generate_image, generate_images_batch
 from lib.deepgram_client import save_word_timestamps
 from lib.transcript import download_youtube, transcribe_video
+
+
+def _get_audio_duration(audio_path: Path) -> float:
+    result = subprocess.run(
+        ["ffprobe", "-v", "quiet", "-print_format", "json", "-show_format", str(audio_path)],
+        capture_output=True, text=True, check=True,
+    )
+    return float(json.loads(result.stdout)["format"]["duration"])
+
+
+def _rescale_scenes_to_audio(run_id: str, output_dir: Path):
+    scenes_path = output_dir / "scenes.json"
+    audio_path = output_dir / "narration.mp3"
+
+    if not scenes_path.exists() or not audio_path.exists():
+        return
+
+    audio_sec = _get_audio_duration(audio_path)
+    data = json.loads(scenes_path.read_text(encoding='utf-8'))
+    old_total = sum(s["duration"] for s in data["scenes"])
+    drift = abs(audio_sec - old_total)
+
+    if drift < 0.5:
+        print(f"[RESCALE] Scene durations match audio ({old_total:.2f}s). No adjustment needed.")
+        return
+
+    scale = audio_sec / old_total
+    print(f"[RESCALE] Audio: {audio_sec:.2f}s | Scenes total: {old_total:.2f}s | drift: {drift:+.2f}s — rescaling x{scale:.4f}")
+
+    for s in data["scenes"]:
+        s["duration"] = round(s["duration"] * scale, 2)
+
+    residual = round(audio_sec - sum(s["duration"] for s in data["scenes"]), 2)
+    data["scenes"][-1]["duration"] = round(data["scenes"][-1]["duration"] + residual, 2)
+    data["total_duration_seconds"] = round(sum(s["duration"] for s in data["scenes"]), 2)
+
+    scenes_path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding='utf-8')
+    print(f"[RESCALE] Done — {len(data['scenes'])} scenes rescaled to {data['total_duration_seconds']}s")
 
 
 def stage_tts(run_id: str):
@@ -45,6 +84,8 @@ def stage_timestamps(run_id: str):
     save_word_timestamps(audio_path, words_path)
     update_stage(run_id, "timestamps", "complete", str(words_path))
     print(f"[TIMESTAMPS] Done: {words_path}")
+
+    _rescale_scenes_to_audio(run_id, output_dir)
 
 
 def stage_images(run_id: str):
@@ -85,6 +126,8 @@ def stage_render(run_id: str):
 
     remotion_dir = Path(__file__).parent.parent / "remotion"
     final_path = output_dir / "final.mp4"
+
+    _rescale_scenes_to_audio(run_id, output_dir)
 
     print("[RENDER] Rendering video with Remotion...")
     update_stage(run_id, "render", "in_progress")
