@@ -14,7 +14,9 @@
       "Bash(PYTHONPATH=\"C:\\\\Users\\\\emcc1\\\\Downloads\\\\Repos\\\\remotion videos\\\\YashAiGuy\\\\idea-to-long-length-faceless-youtube-video-agent\" venv/Scripts/python.exe -m lib.pipeline --stage tts --run-id 2026-05-07_093140_what-nobody-tells-you-about-your-401k)",
       "Bash(PYTHONPATH=\"C:\\\\Users\\\\emcc1\\\\Downloads\\\\Repos\\\\remotion videos\\\\YashAiGuy\\\\idea-to-long-length-faceless-youtube-video-agent\" venv/Scripts/python.exe -m lib.pipeline --stage images --run-id 2026-05-07_093140_what-nobody-tells-you-about-your-401k)",
       "Bash(node render.mjs ../outputs/2026-05-07_093140_what-nobody-tells-you-about-your-401k vector_infographic ../outputs/2026-05-07_093140_what-nobody-tells-you-about-your-401k/final.mp4)",
-      "Bash(venv\\\\Scripts\\\\python.exe -m lib.pipeline --stage thumbnail --run-id 2026-05-07_093140_what-nobody-tells-you-about-your-401k)"
+      "Bash(venv\\\\Scripts\\\\python.exe -m lib.pipeline --stage thumbnail --run-id 2026-05-07_093140_what-nobody-tells-you-about-your-401k)",
+      "PowerShell(cd \"C:\\\\Users\\\\emcc1\\\\Downloads\\\\Repos\\\\remotion videos\\\\YashAiGuy\\\\idea-to-long-length-faceless-youtube-video-agent\"; \\(Get-Content outputs\\\\2026-05-07_140215_viral-dna-pending\\\\script.md -Raw\\) -split '\\\\s+' | Where-Object { $_ -ne '' } | Measure-Object | Select-Object -ExpandProperty Count)",
+      "PowerShell(Get-Item *)"
     ]
   }
 }
