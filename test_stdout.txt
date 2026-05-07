@@ -1,0 +1,6 @@
+    Retry 1/6 in 15s: output_mime_type parameter is not supported in Gemini API.
+    Retry 2/6 in 30s: output_mime_type parameter is not supported in Gemini API.
+    Retry 3/6 in 45s: output_mime_type parameter is not supported in Gemini API.
+    Retry 4/6 in 60s: output_mime_type parameter is not supported in Gemini API.
+    Retry 5/6 in 75s: output_mime_type parameter is not supported in Gemini API.
+ERROR: ValueError: output_mime_type parameter is not supported in Gemini API.

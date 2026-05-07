@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Remove-Item C:\\\\Users\\\\emcc1\\\\Downloads\\\\Repos\\\\remotion videos\\\\YashAiGuy\\\\idea-to-long-length-faceless-youtube-video-agent\\\\outputs\\\\2026-05-07_051644_emergency-fund-savings-vs-invested\\\\images\\\\* *)",
+      "Bash(PYTHONPATH=\"C:\\\\Users\\\\emcc1\\\\Downloads\\\\Repos\\\\remotion videos\\\\YashAiGuy\\\\idea-to-long-length-faceless-youtube-video-agent\" venv/Scripts/python.exe -m lib.pipeline --stage images --run-id 2026-05-07_051644_emergency-fund-savings-vs-invested)",
+      "Bash(venv/Scripts/python.exe -c ' *)",
+      "Bash(node render.mjs ../outputs/2026-05-07_051644_emergency-fund-savings-vs-invested vector_infographic ../outputs/2026-05-07_051644_emergency-fund-savings-vs-invested/final.mp4)",
+      "WebFetch(domain:ai.google.dev)",
+      "WebFetch(domain:deepgram.com)",
+      "WebFetch(domain:elevenlabs.io)",
+      "WebSearch"
+    ]
+  }
+}

@@ -1,5 +1,6 @@
 import json
 import os
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -7,7 +8,29 @@ import requests
 
 from lib.config import DEEPGRAM_API_KEY, DEEPGRAM_MODEL
 
-_ENV = {**os.environ, "PATH": f"/opt/homebrew/bin:{os.environ.get('PATH', '')}"}
+_FFMPEG_CANDIDATE_DIRS = [
+    r"C:\Users\emcc1\Downloads\Repos\remotion videos\YashAiGuy\idea-to-long-length-faceless-youtube-video-agent\remotion\node_modules\@remotion\compositor-win32-x64-msvc",
+    r"C:\Users\emcc1\AppData\Local\Microsoft\WinGet\Packages\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\ffmpeg-8.1.1-full_build\bin",
+    "/opt/homebrew/bin",
+]
+
+
+def _find_exe(name: str) -> str:
+    # Try system PATH first
+    found = shutil.which(name)
+    if found:
+        return found
+    # Try candidate dirs with and without .exe extension
+    for d in _FFMPEG_CANDIDATE_DIRS:
+        for suffix in ("", ".exe"):
+            p = Path(d) / (name + suffix)
+            if p.exists():
+                return str(p)
+    return name  # fall back to bare name and let OS raise the error
+
+
+_FFMPEG = _find_exe("ffmpeg")
+_FFPROBE = _find_exe("ffprobe")
 
 
 def extract_audio(input_path: Path, output_path: Path, sample_rate: int = 16000) -> Path:
@@ -16,18 +39,18 @@ def extract_audio(input_path: Path, output_path: Path, sample_rate: int = 16000)
         return output_path
     subprocess.run(
         [
-            "ffprobe", "-v", "error", "-show_entries", "format=duration",
+            _FFPROBE, "-v", "error", "-show_entries", "format=duration",
             "-of", "default=noprint_wrappers=1:nokey=1", str(input_path),
         ],
-        capture_output=True, check=True, env=_ENV,
+        capture_output=True, check=True,
     )
     subprocess.run(
         [
-            "ffmpeg", "-y", "-i", str(input_path),
+            _FFMPEG, "-y", "-i", str(input_path),
             "-ar", str(sample_rate), "-ac", "1", "-f", "wav",
             str(output_path),
         ],
-        capture_output=True, check=True, env=_ENV,
+        capture_output=True, check=True,
     )
     return output_path
 
@@ -85,6 +108,6 @@ def save_word_timestamps(audio_path: Path, output_path: Path) -> Path:
         print(f"  Skipping (exists): {output_path.name}")
         return output_path
     words = get_word_timestamps(audio_path)
-    output_path.write_text(json.dumps(words, indent=2))
+    output_path.write_text(json.dumps(words, indent=2, ensure_ascii=False), encoding='utf-8')
     print(f"  Saved {len(words)} words to {output_path.name}")
     return output_path

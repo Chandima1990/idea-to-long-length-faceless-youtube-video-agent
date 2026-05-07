@@ -39,13 +39,13 @@ def create_run(title: str, mode: str, voice: str, film_preset: str, duration_min
 
     STATE_DIR.mkdir(parents=True, exist_ok=True)
     state_path = STATE_DIR / f"{run_id}.json"
-    state_path.write_text(json.dumps(run_state, indent=2))
+    state_path.write_text(json.dumps(run_state, indent=2, ensure_ascii=False), encoding='utf-8')
     return run_state
 
 
 def load_run(run_id: str) -> dict:
     state_path = STATE_DIR / f"{run_id}.json"
-    return json.loads(state_path.read_text())
+    return json.loads(state_path.read_text(encoding='utf-8'))
 
 
 def update_stage(run_id: str, stage: str, status: str, output: str = "") -> dict:
@@ -54,7 +54,7 @@ def update_stage(run_id: str, stage: str, status: str, output: str = "") -> dict
     if output:
         run["stages"][stage]["output"] = output
     state_path = STATE_DIR / f"{run_id}.json"
-    state_path.write_text(json.dumps(run, indent=2))
+    state_path.write_text(json.dumps(run, indent=2, ensure_ascii=False), encoding='utf-8')
     return run
 
 
@@ -62,7 +62,7 @@ def update_run(run_id: str, updates: dict) -> dict:
     run = load_run(run_id)
     run.update(updates)
     state_path = STATE_DIR / f"{run_id}.json"
-    state_path.write_text(json.dumps(run, indent=2))
+    state_path.write_text(json.dumps(run, indent=2, ensure_ascii=False), encoding='utf-8')
     return run
 
 
@@ -70,5 +70,5 @@ def list_runs() -> list:
     STATE_DIR.mkdir(parents=True, exist_ok=True)
     runs = []
     for f in sorted(STATE_DIR.glob("*.json"), reverse=True):
-        runs.append(json.loads(f.read_text()))
+        runs.append(json.loads(f.read_text(encoding='utf-8')))
     return runs

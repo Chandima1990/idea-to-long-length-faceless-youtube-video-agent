@@ -27,6 +27,10 @@ GATHOS_TTS_POLL_INTERVAL = 3
 GATHOS_TIMEOUT = 600
 GATHOS_MAX_RETRIES = 5
 
+# Gemini API (image generation)
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
+GEMINI_IMAGE_MODEL = os.getenv("GEMINI_IMAGE_MODEL", "gemini-3.1-flash-image-preview")
+
 # Deepgram API
 DEEPGRAM_API_KEY = os.getenv("DEEPGRAM_API_KEY", "")
 DEEPGRAM_MODEL = "nova-3"
@@ -53,6 +57,7 @@ FILM_PRESETS = {
     "dark_cinematic": {"filter": "contrast(1.12) saturate(0.7) brightness(0.88)", "grain": 0.08, "vignette": 0.4},
     "sepia_archival": {"filter": "sepia(0.6) contrast(1.05) brightness(0.9)", "grain": 0.22, "vignette": 0.7},
     "none": {"filter": "none", "grain": 0, "vignette": 0},
+    "vector_infographic": {"filter": "contrast(1.06) saturate(1.1) brightness(1.02)", "grain": 0, "vignette": 0},
 }
 
 # Paths

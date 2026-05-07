@@ -4,7 +4,8 @@ from pathlib import Path
 
 from lib.config import OUTPUTS_DIR
 from lib.state import create_run, load_run, update_stage
-from lib.gathos_client import generate_images_batch, generate_tts
+from lib.gathos_client import generate_tts
+from lib.gemini_client import generate_images_batch
 from lib.deepgram_client import save_word_timestamps
 from lib.transcript import download_youtube, transcribe_video
 
@@ -18,7 +19,7 @@ def stage_tts(run_id: str):
         print("ERROR: script.md not found. Run script stage first.")
         sys.exit(1)
 
-    narration = script_path.read_text().strip()
+    narration = script_path.read_text(encoding='utf-8').strip()
     voice = run["voice"]
     audio_path = output_dir / "narration.mp3"
 
@@ -56,7 +57,7 @@ def stage_images(run_id: str):
         print("ERROR: scenes.json not found. Run scenes stage first.")
         sys.exit(1)
 
-    scenes = json.loads(scenes_path.read_text())
+    scenes = json.loads(scenes_path.read_text(encoding='utf-8'))
     prompts = []
     for i, scene in enumerate(scenes["scenes"]):
         prompts.append({
@@ -143,11 +144,12 @@ if __name__ == "__main__":
     if args.check:
         print("Checking dependencies...")
         import shutil
-        from lib.config import GATHOS_IMAGE_API_KEY, GATHOS_TTS_API_KEY, DEEPGRAM_API_KEY
+        from lib.config import GATHOS_TTS_API_KEY, DEEPGRAM_API_KEY, GEMINI_API_KEY, GEMINI_IMAGE_MODEL
         for tool in ["ffmpeg", "ffprobe"]:
             path = shutil.which(tool) or shutil.which(tool, path="/opt/homebrew/bin")
             print(f"  {tool}: {'OK' if path else 'MISSING'} ({path})")
-        print(f"  Gathos Image key: {'SET' if GATHOS_IMAGE_API_KEY else 'MISSING'}")
+        print(f"  Gemini API key: {'SET' if GEMINI_API_KEY else 'MISSING'}")
+        print(f"  Gemini image model: {GEMINI_IMAGE_MODEL}")
         print(f"  Gathos TTS key: {'SET' if GATHOS_TTS_API_KEY else 'MISSING'}")
         print(f"  Deepgram API key: {'SET' if DEEPGRAM_API_KEY else 'MISSING'}")
         print("Done.")
