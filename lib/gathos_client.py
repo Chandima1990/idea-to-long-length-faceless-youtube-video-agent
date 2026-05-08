@@ -51,18 +51,21 @@ def submit_image_job(prompt: str, width: int = GATHOS_IMAGE_WIDTH, height: int =
 def poll_image_job(job_id: str) -> str:
     start = time.time()
     while time.time() - start < GATHOS_TIMEOUT:
-        resp = requests.get(
-            f"{GATHOS_BASE_URL}/image-generation/jobs/{job_id}",
-            headers=_image_headers(),
-            timeout=30,
-        )
-        resp.raise_for_status()
-        data = resp.json()
-        if data.get("status") == "completed":
-            result = data.get("result", {})
-            return result.get("image_base64", result.get("image", ""))
-        if data.get("status") == "failed":
-            raise RuntimeError(f"Image job {job_id} failed: {data}")
+        try:
+            resp = requests.get(
+                f"{GATHOS_BASE_URL}/image-generation/jobs/{job_id}",
+                headers=_image_headers(),
+                timeout=30,
+            )
+            resp.raise_for_status()
+            data = resp.json()
+            if data.get("status") == "completed":
+                result = data.get("result", {})
+                return result.get("image_base64", result.get("image", ""))
+            if data.get("status") == "failed":
+                raise RuntimeError(f"Image job {job_id} failed: {data}")
+        except (requests.ConnectionError, requests.Timeout) as e:
+            print(f"    Poll network error (will retry): {e}")
         time.sleep(GATHOS_POLL_INTERVAL)
     raise TimeoutError(f"Image job {job_id} timed out after {GATHOS_TIMEOUT}s")
 
