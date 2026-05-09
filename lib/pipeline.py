@@ -1,4 +1,6 @@
 import json
+import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -10,12 +12,46 @@ from lib.deepgram_client import save_word_timestamps
 from lib.transcript import download_youtube, transcribe_video
 
 
+def _bundled_binary(name: str) -> str | None:
+    remotion_dir = Path(__file__).parent.parent / "remotion"
+    matches = sorted(remotion_dir.glob(f"node_modules/@remotion/compositor-*/{name}.exe"))
+    if matches:
+        return str(matches[0])
+    return None
+
+
+def _ffprobe_executable() -> str:
+    candidate = shutil.which("ffprobe") or shutil.which("ffprobe.exe") or _bundled_binary("ffprobe")
+    if candidate:
+        return candidate
+    raise RuntimeError("ffprobe executable not found. Install ffmpeg or keep Remotion compositor binaries installed.")
+
+
 def _get_audio_duration(audio_path: Path) -> float:
     result = subprocess.run(
-        ["ffprobe", "-v", "quiet", "-print_format", "json", "-show_format", str(audio_path)],
+        [_ffprobe_executable(), "-v", "quiet", "-print_format", "json", "-show_format", str(audio_path)],
         capture_output=True, text=True, check=True,
     )
     return float(json.loads(result.stdout)["format"]["duration"])
+
+
+def _node_executable() -> str:
+    configured = os.getenv("NODE_EXE")
+    candidates = [
+        configured,
+        shutil.which("node"),
+        shutil.which("node.exe"),
+    ]
+
+    local_app_data = os.getenv("LOCALAPPDATA")
+    if local_app_data:
+        candidates.extend(str(p) for p in Path(local_app_data).glob("ms-playwright-go/*/node.exe"))
+
+    for candidate in candidates:
+        if candidate and Path(candidate).exists():
+            return str(candidate)
+
+    raise RuntimeError("Node executable not found. Set NODE_EXE or add node to PATH before rendering.")
 
 
 def _rescale_scenes_to_audio(run_id: str, output_dir: Path):
@@ -117,12 +153,6 @@ def stage_render(run_id: str):
     output_dir = Path(run["output_dir"])
     import subprocess
 
-    props = {
-        "outputDir": str(output_dir),
-        "filmPreset": run["film_preset"],
-    }
-    props_json = json.dumps(props)
-
     remotion_dir = Path(__file__).parent.parent / "remotion"
     final_path = output_dir / "final.mp4"
 
@@ -132,10 +162,11 @@ def stage_render(run_id: str):
     update_stage(run_id, "render", "in_progress")
     subprocess.run(
         [
-            "npx", "remotion", "render",
-            "ViralBrollVideo",
+            _node_executable(),
+            "render.mjs",
+            str(output_dir),
+            run["film_preset"],
             str(final_path),
-            "--props", props_json,
         ],
         cwd=str(remotion_dir),
         check=True,

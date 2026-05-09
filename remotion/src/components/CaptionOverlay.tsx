@@ -1,7 +1,6 @@
 import {
   AbsoluteFill,
   Sequence,
-  interpolate,
   spring,
   useCurrentFrame,
   useVideoConfig,
@@ -10,100 +9,65 @@ import { WordTimestamp } from "../types";
 
 interface CaptionOverlayProps {
   words: WordTimestamp[];
-  wordsPerPage?: number;
   fontSize?: number;
   color?: string;
-  highlightColor?: string;
-  backgroundColor?: string;
+  strokeColor?: string;
   fontFamily?: string;
 }
 
-interface CaptionPage {
-  words: WordTimestamp[];
-  startMs: number;
-  endMs: number;
-}
+const cleanWord = (word: string) => word.trim();
 
-function buildPages(words: WordTimestamp[], wordsPerPage: number): CaptionPage[] {
-  const pages: CaptionPage[] = [];
-  for (let i = 0; i < words.length; i += wordsPerPage) {
-    const pageWords = words.slice(i, i + wordsPerPage);
-    if (pageWords.length === 0) continue;
-    pages.push({
-      words: pageWords,
-      startMs: pageWords[0].startMs,
-      endMs: pageWords[pageWords.length - 1].endMs,
-    });
-  }
-  return pages;
-}
-
-const PageRenderer: React.FC<{
-  page: CaptionPage;
+const WordRenderer: React.FC<{
+  word: string;
   fontSize: number;
   color: string;
-  highlightColor: string;
-  backgroundColor: string;
+  strokeColor: string;
   fontFamily: string;
-}> = ({ page, fontSize, color, highlightColor, backgroundColor, fontFamily }) => {
+}> = ({ word, fontSize, color, strokeColor, fontFamily }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const currentMs = page.startMs + (frame / fps) * 1000;
-
-  const entrance = spring({
+  const pop = spring({
     frame,
     fps,
-    config: { damping: 18, stiffness: 120 },
+    config: { damping: 12, stiffness: 260, mass: 0.45 },
+    durationInFrames: 6,
   });
+  const scale = 0.9 + Math.min(pop, 1) * 0.1;
 
   return (
     <AbsoluteFill
       style={{
-        justifyContent: "flex-end",
-        alignItems: "center",
-        paddingBottom: 60,
+        pointerEvents: "none",
       }}
     >
       <div
         style={{
-          opacity: entrance,
-          transform: `translateY(${interpolate(entrance, [0, 1], [20, 0])}px)`,
-          backgroundColor,
-          borderRadius: 12,
-          padding: "14px 28px",
-          maxWidth: "85%",
+          position: "absolute",
+          left: "50%",
+          top: "56%",
+          width: "92%",
           textAlign: "center",
+          transform: `translate(-50%, -50%) scale(${scale})`,
+          transformOrigin: "center center",
         }}
       >
         <span
           style={{
-            fontSize,
-            fontWeight: 800,
+            color,
             fontFamily,
-            lineHeight: 1.4,
+            fontSize,
+            fontWeight: 900,
+            lineHeight: 0.95,
+            letterSpacing: 0,
             textTransform: "uppercase",
-            letterSpacing: "0.02em",
+            WebkitTextStroke: `14px ${strokeColor}`,
+            paintOrder: "stroke fill",
+            textShadow: "0 10px 16px rgba(0,0,0,0.55)",
+            overflowWrap: "break-word",
           }}
         >
-          {page.words.map((w, i) => {
-            const isActive = w.startMs <= currentMs && w.endMs > currentMs;
-            const isPast = w.endMs <= currentMs;
-            return (
-              <span
-                key={`${w.startMs}-${i}`}
-                style={{
-                  color: isActive ? highlightColor : isPast ? color : `${color}88`,
-                  textShadow: isActive
-                    ? `0 0 24px ${highlightColor}66, 0 2px 6px rgba(0,0,0,0.6)`
-                    : "0 2px 4px rgba(0,0,0,0.5)",
-                }}
-              >
-                {w.word}
-                {i < page.words.length - 1 ? " " : ""}
-              </span>
-            );
-          })}
+          {word}
         </span>
       </div>
     </AbsoluteFill>
@@ -112,31 +76,31 @@ const PageRenderer: React.FC<{
 
 export const CaptionOverlay: React.FC<CaptionOverlayProps> = ({
   words,
-  wordsPerPage = 6,
-  fontSize = 44,
+  fontSize = 118,
   color = "#FFFFFF",
-  highlightColor = "#22D3EE",
-  backgroundColor = "rgba(0, 0, 0, 0.55)",
-  fontFamily = "Inter, system-ui, sans-serif",
+  strokeColor = "#000000",
+  fontFamily = "Arial Black, Impact, sans-serif",
 }) => {
   const { fps } = useVideoConfig();
-  const pages = buildPages(words, wordsPerPage);
+  const visibleWords = words
+    .map((word) => ({ ...word, word: cleanWord(word.word) }))
+    .filter((word) => word.word.length > 0);
 
   return (
     <AbsoluteFill>
-      {pages.map((page, i) => {
-        const fromFrame = Math.round((page.startMs / 1000) * fps);
-        const nextStart = pages[i + 1]?.startMs ?? page.endMs + 500;
-        const duration = Math.max(1, Math.round(((nextStart - page.startMs) / 1000) * fps));
+      {visibleWords.map((word, i) => {
+        const fromFrame = Math.round((word.startMs / 1000) * fps);
+        const nextStartMs = visibleWords[i + 1]?.startMs ?? word.endMs + 180;
+        const durationMs = Math.max(80, nextStartMs - word.startMs);
+        const duration = Math.max(1, Math.round((durationMs / 1000) * fps));
 
         return (
-          <Sequence key={i} from={fromFrame} durationInFrames={duration}>
-            <PageRenderer
-              page={page}
+          <Sequence key={`${word.startMs}-${i}`} from={fromFrame} durationInFrames={duration}>
+            <WordRenderer
+              word={word.word}
               fontSize={fontSize}
               color={color}
-              highlightColor={highlightColor}
-              backgroundColor={backgroundColor}
+              strokeColor={strokeColor}
               fontFamily={fontFamily}
             />
           </Sequence>

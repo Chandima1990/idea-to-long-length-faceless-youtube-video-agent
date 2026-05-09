@@ -1,118 +1,104 @@
-# Cinematographic Breakdown
+# Cinematic Minifigure Shorts Breakdown
 
 ## Input
-- `outputs/<run_id>/script.md` — the narration script
-- `duration_minutes` — target length
+- `outputs/<run_id>/script.md` - narration script
+- `duration_minutes` - target length, default 1.5 minutes
 
 ## Process
 
-### Part 1: STYLE CARD
-Read the entire script and derive a unified visual style:
+### Part 1: Style Card
+Use this exact channel aesthetic as the base style. Do not replace it with a new visual style:
 
 ```json
 {
-  "style_name": "descriptive name (e.g., 'Epic Prehistoric Documentary')",
-  "photographic_style": "what kind of imagery (e.g., 'photorealistic BBC documentary')",
-  "color_palette": "dominant colors and tones",
-  "lighting": "lighting approach (e.g., 'natural golden hour, misty mornings')",
-  "camera": "composition approach (e.g., 'wide-angle, rule of thirds, layered depth')",
-  "texture": "surface quality (e.g., 'high detail natural textures')",
-  "mood": "emotional tone (e.g., 'awe-inspiring, epic, ancient')",
-  "style_suffix": "append to EVERY image prompt for consistency"
+  "style_name": "Cinematic Macro Plastic Minifigure Diorama",
+  "photographic_style": "cinematic macro photography of a 3D rendered plastic building block minifigure",
+  "color_palette": "olive green jacket, red beret, cracked tan desert ground, twilight blues, soft moon glow, high-contrast black shadows",
+  "lighting": "dramatic cinematic lighting, soft bright backlight creating rim light on the character's left side, high-contrast soft fill from the front",
+  "camera": "vertical 9:16 ground-level macro camera, very shallow depth of field, heavy bokeh, figure razor sharp",
+  "texture": "realistic glossy plastic with subtle subsurface scattering, molded plastic hair, painted-on facial features, tangible miniature scale",
+  "mood": "tense, cinematic, miniature war-story atmosphere",
+  "style_suffix": "Cinematic macro photography of a 3D rendered plastic building block minifigure (LEGO style). The character has painted-on facial features, molded plastic hair, and wears an olive-green military jacket with a red beret. The figure is standing in a miniature diorama on cracked, arid desert ground. The camera is at ground level with a very shallow depth of field (heavy bokeh), keeping the figure in razor-sharp focus while heavily blurring the background. The background is a twilight scene with a soft glowing moon. Lighting is dramatic and cinematic, featuring a soft, bright backlight acting as a rim light on the character's left side, with a high-contrast soft fill light in the front. Materials must look like realistic, glossy plastic with subtle subsurface scattering to appear tangible. Vertical 9:16 composition, no text, no watermark."
 }
 ```
 
-Save to `outputs/<run_id>/style.json`
+Save to `outputs/<run_id>/style.json`.
 
-The `style_suffix` is the KEY to consistency. It gets appended word-for-word to every image prompt. Example:
-> "cinematic documentary photography, photorealistic, earth tones, natural lighting, shot on RED V-Raptor, 8K detail"
+### Part 2: Characters
+The recurring visual character is the minifigure. If the script has named people, treat them as story roles represented by the same channel minifigure unless the user explicitly asks for additional characters.
 
-### Part 2: CHARACTERS
-Parse the script for any recurring people/characters. For each, create a character card:
+Save to `outputs/<run_id>/characters.json`:
 
 ```json
 {
   "characters": [
     {
-      "id": "george",
-      "name": "George Hadley",
-      "description": "A weathered middle-aged American farmer in his 50s, strong build, sun-tanned face with stubble, wearing a tan baseball cap and blue denim work shirt, brown leather boots",
-      "appears_in_scenes": [1, 3, 7, 12, 18]
+      "id": "main_minifigure",
+      "name": "Main minifigure narrator",
+      "description": "A 3D rendered glossy plastic building block minifigure with painted-on facial features, molded plastic hair, olive-green military jacket, and red beret",
+      "appears_in_scenes": []
     }
   ]
 }
 ```
 
-Save to `outputs/<run_id>/characters.json`
+Fill `appears_in_scenes` after the scene list is complete.
 
-If no recurring characters (e.g., a nature documentary), save empty array.
+### Part 3: Scene Breakdown
+Split the script into visual segments. Each segment is one generated image.
 
-### Part 3: SCENE BREAKDOWN
-Split the script into visual segments. Each segment = one B-roll image.
+Segment duration:
+- 3-6 seconds
+- Default to 4 seconds
+- Formula: `duration = max(3, min(6, round(word_count / 2.5)))`
+- Split at sentence boundaries only. Never split mid-sentence.
 
-**Segment duration:** 7-15 seconds (default 10s)
-**Formula:** `duration = max(7, min(15, round(word_count / 2.5)))`
-**Split at sentence boundaries only** — never mid-sentence.
-
-For EACH segment, generate:
+For each segment, generate:
 
 ```json
 {
   "scene_number": 1,
   "narration_text": "exact words spoken during this segment",
-  "word_count": 25,
-  "duration": 10,
-  "image_prompt": "3-6 sentence cinematographic shot description (SEE RULES BELOW)",
+  "word_count": 10,
+  "duration": 4,
+  "image_prompt": "3-6 sentence cinematographic shot description ending with style_suffix",
   "shot_type": "wide | medium | close_up | detail | aerial | establishing",
   "ken_burns": "pan_right | pan_left | zoom_in | zoom_out | pan_up | zoom_in_pan_right",
   "transition": "dissolve | white_flash | fade_black",
-  "characters_in_scene": ["george"]
+  "characters_in_scene": ["main_minifigure"]
 }
 ```
 
-### IMAGE PROMPT RULES (Critical)
+## Image Prompt Rules
 
-The image prompt is a CINEMATOGRAPHER'S SHOT DESCRIPTION, not a topic summary.
+The image prompt is a cinematographer's shot description, not a topic summary.
 
-**DO:**
-- Describe the SPECIFIC ACTION matching the narration verb
-- Include character descriptions (copy from character card) when characters appear
-- Specify camera angle, lighting, depth of field
-- End with the style_suffix from the Style Card
-- Use 3-6 detailed sentences
+Do:
+- Keep the minifigure visible in every scene unless the narration explicitly requires a detail insert.
+- Place the character so the torso/chest remains near the center for captions.
+- Describe a specific pose, prop, foreground object, or desert-diorama arrangement that matches the narration.
+- Include ground-level camera angle, shallow depth of field, rim light, moonlit twilight background, and glossy plastic material.
+- End every image prompt with the exact `style_suffix`.
+- Use vertical 9:16 composition.
 
-**DON'T:**
-- Write generic topic illustrations ("a farmer in a field")
-- Use abstract concepts ("the feeling of loss")
-- Include text, watermarks, or UI elements in the prompt
-- Reuse the same composition for consecutive scenes
+Don't:
+- Include text, signs, labels, UI, watermark, or subtitles in image prompts.
+- Drift into generic photoreal people, realistic soldiers, realistic weapons, or non-plastic characters.
+- Reuse the same composition for consecutive scenes.
+- Crop off the torso where captions need to sit.
 
-**EXAMPLE:**
-Narration: "George knelt in the freshly turned earth and placed the first sapling into the hole he'd dug that morning."
+## Ken Burns Assignment Rules
+- Establishing desert diorama shots -> `pan_right` or `pan_left`
+- Close-up faces or emotional beats -> `zoom_in`
+- Reveals or comparisons -> `zoom_out`
+- Tall props, moon, towers, cliffs -> `pan_up`
+- Action beats -> `zoom_in_pan_right`
+- Alternate directions between consecutive scenes.
 
-BAD: "A farmer planting a tree"
-
-GOOD: "A weathered middle-aged American farmer in his 50s, tan cap, blue denim shirt, kneeling in dark freshly-tilled soil, carefully placing a small green sapling into a shallow hole. Golden hour sunlight from the left casts long shadows across the field. Wide-angle shot, low camera position at ground level, shallow depth of field with blurred Kansas flatlands in the background. Cinematic documentary photography, photorealistic, earth tones, natural lighting, 8K detail."
-
-### KEN BURNS ASSIGNMENT RULES
-- **Landscapes / establishing shots** → `pan_right` or `pan_left`
-- **Close-up faces / emotional moments** → `zoom_in`
-- **Group scenes / reveals** → `zoom_out`
-- **Tall subjects (buildings, mountains)** → `pan_up`
-- **Action / dynamic moments** → `zoom_in_pan_right`
-- **ALTERNATE** directions between consecutive scenes (never same direction twice in a row)
-
-### TRANSITION RULES
-- Default: `dissolve` (smooth crossfade)
-- Use `white_flash` for major chapter breaks / dramatic reveals (max 3-4 per video)
-- Use `fade_black` for final scene only
-
-### SHOT TYPE VARIETY
-Ensure variety across the video:
-- No more than 2 consecutive scenes with the same shot_type
-- Mix of: 30% wide/aerial, 30% medium, 25% close_up/detail, 15% establishing
-- Opening scene should be `establishing` or `aerial`
-- Closing scene should be `wide` or `establishing`
+## Transition Rules
+- Default: `dissolve`
+- Use `white_flash` only for major reveals, max 2 in a 90-second Short.
+- Use `fade_black` for final scene only.
 
 ## Output
 Save to `outputs/<run_id>/scenes.json`:
@@ -120,22 +106,22 @@ Save to `outputs/<run_id>/scenes.json`:
 ```json
 {
   "title": "video title",
-  "description": "YouTube description (2-3 sentences + keywords)",
+  "description": "YouTube Shorts description, 1-2 sentences plus keywords",
   "tags": ["tag1", "tag2"],
-  "thumbnail_prompt": "YouTube thumbnail, 16:9. Cartoon animated bald overweight man with glasses showing shocked/worried expression, bold black outlines, flat Family-Guy-style cartoon. Character on the right side. Left side: large bold white text on dark red background with the video's key hook (2-4 words, ALL CAPS). Center: simple flat cartoon graphic illustrating the video's core concept (chart, icon, dollar sign, etc.). Dark charcoal background, high-contrast yellow and red accents, bold black outlines on all elements, flat 2D cartoon style, no gradients, no photorealism.",
-  "total_scenes": 60,
-  "total_duration_seconds": 600,
-  "scenes": [...]
+  "thumbnail_prompt": "Vertical 9:16 YouTube Shorts thumbnail. The same glossy plastic building block minifigure in olive-green military jacket and red beret stands on cracked desert ground under a twilight moon, dramatic rim light and hard black shadows, cinematic macro depth of field. Leave clean negative space for platform crop. No text, no watermark.",
+  "total_scenes": 22,
+  "total_duration_seconds": 90,
+  "scenes": []
 }
 ```
 
 ## Quality Checks
-1. All narration_text concatenated = original script (no words added or lost)
-2. All scenes 7-15 seconds
-3. Image prompts are 3-6 sentences each
-4. EVERY image prompt directly depicts its narration (verify scene by scene)
-5. style_suffix from Style Card appears in EVERY image prompt
-6. Character descriptions from characters.json are injected when character appears
-7. Ken Burns directions alternate (no consecutive repeats)
-8. Shot types are varied (no 3+ consecutive same type)
-9. Transitions: mostly dissolve, 3-4 white_flash max, fade_black only at end
+1. All `narration_text` concatenated equals the original script with no words added or lost.
+2. All scenes are 3-6 seconds unless audio rescaling later adjusts them.
+3. Every image prompt is 3-6 sentences.
+4. Every image prompt directly depicts its narration.
+5. The exact `style_suffix` appears in every image prompt.
+6. The main minifigure appears in every scene unless a detail insert is clearly justified.
+7. Ken Burns directions alternate.
+8. No three consecutive scenes use the same shot type.
+9. Transitions are mostly dissolve, with final scene using fade_black.

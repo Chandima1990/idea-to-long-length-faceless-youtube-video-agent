@@ -13,8 +13,8 @@ export const RemotionRoot: React.FC = () => {
         scenes: [],
         words: [],
       }}
-      width={1920}
-      height={1080}
+      width={1080}
+      height={1920}
       fps={30}
       durationInFrames={300}
     />

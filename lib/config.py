@@ -6,22 +6,23 @@ BASE_DIR = Path(__file__).parent.parent
 load_dotenv(BASE_DIR / ".env")
 
 # Video output
-VIDEO_WIDTH = 1920
-VIDEO_HEIGHT = 1080
+VIDEO_WIDTH = 1080
+VIDEO_HEIGHT = 1920
 FPS = 30
 
 # Pacing
 WORDS_PER_SECOND = 2.5
-MIN_SCENE_DURATION = 7
-MAX_SCENE_DURATION = 15
-DEFAULT_SCENE_DURATION = 10
+MIN_SCENE_DURATION = 3
+MAX_SCENE_DURATION = 6
+DEFAULT_SCENE_DURATION = 4
+DEFAULT_DURATION_MINUTES = 1.5
 
 # Gathos API
 GATHOS_BASE_URL = "https://gathos.com/api/v1"
 GATHOS_IMAGE_API_KEY = os.getenv("GATHOS_API_KEY", os.getenv("GATHOS_IMAGE_API_KEY", ""))
 GATHOS_TTS_API_KEY = os.getenv("GATHOS_TTS_API_KEY", "")
-GATHOS_IMAGE_WIDTH = 1344
-GATHOS_IMAGE_HEIGHT = 768
+GATHOS_IMAGE_WIDTH = 768
+GATHOS_IMAGE_HEIGHT = 1344
 GATHOS_POLL_INTERVAL = 5
 GATHOS_TTS_POLL_INTERVAL = 3
 GATHOS_TIMEOUT = 600
@@ -42,7 +43,20 @@ YOUTUBE_REFRESH_TOKEN = os.getenv("YOUTUBE_REFRESH_TOKEN", "")
 
 # TTS voices
 PRESET_VOICES = ["josh", "koko", "pixxy", "prof", "rochie", "spraky"]
-DEFAULT_VOICE = "josh"
+DEFAULT_VOICE = "pixxy"
+
+# Channel style
+CHANNEL_VISUAL_STYLE_SUFFIX = (
+    "Cinematic macro photography of a 3D rendered plastic building block minifigure "
+    "(LEGO style). The character has painted-on facial features, molded plastic hair, "
+    "and wears an olive-green military jacket with a red beret. The figure is standing "
+    "in a miniature diorama on cracked, arid desert ground. Ground-level camera, very "
+    "shallow depth of field with heavy bokeh, figure in razor-sharp focus and background "
+    "heavily blurred. Twilight background with a soft glowing moon. Dramatic cinematic "
+    "lighting with a soft bright backlight creating rim light on the character's left "
+    "side, high-contrast soft fill light in front. Realistic glossy plastic materials "
+    "with subtle subsurface scattering, tangible miniature scale, vertical 9:16 frame."
+)
 
 # Ken Burns presets
 KEN_BURNS_PRESETS = {

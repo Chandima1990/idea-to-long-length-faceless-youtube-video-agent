@@ -2,14 +2,20 @@ import json
 import re
 from datetime import datetime, timezone
 from pathlib import Path
-from lib.config import OUTPUTS_DIR, STATE_DIR
+from lib.config import DEFAULT_DURATION_MINUTES, DEFAULT_VOICE, OUTPUTS_DIR, STATE_DIR
 
 
 def _slug(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")[:40]
 
 
-def create_run(title: str, mode: str, voice: str, film_preset: str, duration_minutes: int) -> dict:
+def create_run(
+    title: str,
+    mode: str,
+    voice: str = DEFAULT_VOICE,
+    film_preset: str = "dark_cinematic",
+    duration_minutes: float = DEFAULT_DURATION_MINUTES,
+) -> dict:
     ts = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H%M%S")
     run_id = f"{ts}_{_slug(title)}"
     output_dir = OUTPUTS_DIR / run_id

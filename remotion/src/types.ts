@@ -48,6 +48,7 @@ export interface ViralBrollInputProps {
 }
 
 export interface ViralBrollProps {
+  [key: string]: unknown;
   outputDir: string;
   filmPreset: string;
   scenes: SceneData[];

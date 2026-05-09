@@ -3,7 +3,7 @@ import { SceneImage } from "./components/SceneImage";
 import { CaptionOverlay } from "./components/CaptionOverlay";
 import { FilmGrain } from "./components/FilmGrain";
 import { TransitionEffect } from "./components/TransitionEffect";
-import { SceneData, ViralBrollProps, WordTimestamp } from "./types";
+import { SceneData, ViralBrollProps } from "./types";
 
 const FPS = 30;
 
@@ -18,8 +18,8 @@ export const calculateViralBrollMetadata: CalculateMetadataFunction<ViralBrollPr
   return {
     durationInFrames: Math.max(1, Math.ceil(totalSeconds * FPS)),
     fps: FPS,
-    width: 1920,
-    height: 1080,
+    width: 1080,
+    height: 1920,
   };
 };
 
