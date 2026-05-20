@@ -1,0 +1,140 @@
+{
+  "_readme": "This file defines your channel's brand identity. Edit it to change the style of ALL future videos. Every pipeline stage reads this file to stay consistent. To switch to a different channel concept, update this file and all videos will reflect the new brand.",
+
+  "channel": {
+    "name": "Rich Mantra",
+    "niche": "personal finance",
+    "target_audience": "25-45 year olds interested in financial independence, investing, and building wealth",
+    "tone": "smart friend who has done the research so you do not have to — casual, intelligent, occasionally funny, never condescending"
+  },
+
+  "host": {
+    "name": "Josh",
+    "role": "narrator and channel persona — the voice and face of the channel",
+    "personality": "Relatable, slightly self-deprecating, talks like a knowledgeable friend who has been through the struggle. Breaks down complex topics simply without dumbing them down. Uses 'we' and 'you' to include the viewer. Genuinely curious and enthusiastic.",
+    "narration_style": "First-person. Conversational. Short punchy sentences mixed with longer explanatory ones. Uses everyday analogies to explain abstract concepts. Occasional dry humor. Asks rhetorical questions to keep the viewer engaged. Never uses jargon without immediately explaining it.",
+    "signature_phrases": [
+      "here is the thing nobody tells you",
+      "let me break this down",
+      "and this is where it gets interesting",
+      "so what does that actually mean for you",
+      "I did not believe this either until I saw the numbers"
+    ],
+    "physical_description": "A man in his early 30s, medium build, short brown hair neatly styled, warm friendly smile, clean-shaven with light stubble. Wearing a casual dark t-shirt or simple open-collar button-up shirt. Relatable everyday appearance — looks like someone you would trust to explain money to you.",
+    "voice": "josh",
+    "appears_in_broll": true,
+    "broll_note": "Josh appears in scenes where the narration uses first-person action ('I tried this', 'I asked', 'I found') or when the script calls for a talking-head explanation moment. Include him in those scenes. For landscape, data, or abstract scenes, use environment-only B-roll."
+  },
+
+  "visual_style": {
+    "base_style_name": "Clean Modern Documentary",
+    "photographic_style": "photorealistic documentary photography — clean, modern, high production value",
+    "color_palette": "warm neutrals (cream, tan, soft brown), deep blues and teals, clean whites, with occasional bold accent pops (orange or gold) for emphasis",
+    "lighting": "natural soft lighting, well-lit environments, golden hour warmth for outdoor scenes, clean studio-style for indoor scenes",
+    "camera": "rule of thirds composition, varied shot distances (wide to close), shallow depth of field for close-ups, stable professional framing",
+    "texture": "high detail natural textures, crisp sharpness, no artificial grain (unless film preset is applied by the user)",
+    "mood": "informative, engaging, trustworthy, optimistic, modern",
+    "style_suffix_base": "photorealistic documentary photography, clean modern aesthetic, natural warm lighting, sharp high detail, 8K resolution, professional composition, no text overlays, no watermarks, no logos",
+    "style_guide_note": "The agent derives a specific style_suffix per video by combining this base with topic-appropriate imagery (e.g., financial charts for money videos, cityscapes for economics, etc.). The base ensures brand consistency while the topic layer makes each video feel relevant."
+  },
+
+  "thumbnail": {
+    "include_host": true,
+    "host_position": "right side of frame, facing left (toward text), showing a strong expressive reaction — surprised, excited, or concerned depending on video topic",
+    "host_image_description": "A man in his early 30s, medium build, short brown hair, warm friendly smile turned into an expressive reaction (surprised eyebrows raised, or excited open mouth, or concerned furrowed brow). Clean-shaven with light stubble. Casual dark t-shirt. Slightly transparent or cutout style against background.",
+    "background_style": "bold solid color or simple two-tone gradient — high contrast, visually punchy",
+    "text_area": "left two-thirds of frame, large bold white text in ALL CAPS, 2-5 words maximum, strong drop shadow or outline for readability",
+    "accent_colors": "use ONE bold accent per video: deep red (#CC0000), electric blue (#0066FF), or bright yellow (#FFD700)",
+    "overall_style": "eye-catching YouTube thumbnail — bold, simple, immediately communicates the video's hook at small sizes. Host character on the right with expressive face. Bold text on the left. No clutter. High contrast.",
+    "thumbnail_prompt_template": "YouTube thumbnail 16:9. HOST_DESCRIPTION on the right side of frame showing REACTION_TYPE expression, facing left toward the text. Left side: large bold white ALL CAPS text reading VIDEO_HOOK on a ACCENT_COLOR background block. BACKGROUND_STYLE background. Bold, high-contrast design. Clean simple layout. No small text. No clutter. Professional YouTube thumbnail style."
+  },
+
+  "youtube_metadata": {
+    "_readme": "Use this structure for metadata.json, metadata.txt, and YouTube upload copy. Match the reference pattern: title repeated at the top, curiosity-driven intro questions, subscriber CTA, subscribe link block, thanks line, hashtags, and channel boilerplate.",
+    "category_id": "27",
+    "default_language": "en",
+    "default_audio_language": "en",
+    "title_style": {
+      "format": "Clear searchable title with a concrete benefit or topic, similar to: How To Invest in ETFs for Beginners (starting with $5,000)",
+      "rules": [
+        "Use title case unless a keyword needs emphasis.",
+        "Include the main finance keyword early.",
+        "Use parentheses for a concrete hook when useful, such as a dollar amount, age, or beginner angle.",
+        "Keep the title natural and searchable, not clickbait-only."
+      ]
+    },
+    "description_pattern": {
+      "template": [
+        "{{TITLE}}",
+        "",
+        "{{TITLE}}",
+        "",
+        "{{HOOK_PARAGRAPH}}",
+        "{{CURIOSITY_QUESTIONS}}",
+        "",
+        "",
+        "If you liked this video and would like to see more videos like this, we would be happy to welcome you as a subscriber. Thank you very much",
+        "",
+        "subscribe here",
+        "",
+        "{{SUBSCRIBE_URL}}",
+        "{{SUBSCRIBE_URL}}",
+        "",
+        "Thank you for watching this video:",
+        "",
+        "{{HASHTAGS}}",
+        "",
+        "",
+        "In this channel, Josh explores a wide variety of money topics. Join the journey and experience the different money and investment aspects. Let's go"
+      ],
+      "hook_paragraph_guidance": "Start with a relatable money situation and make the viewer feel the video is for them.",
+      "curiosity_questions_guidance": "Use 3-6 viewer questions that mirror real anxieties about the topic. Example: Is this enough to start? What if I make the wrong choice? What if I am already too late?",
+      "subscribe_url": "CHANNEL_SUBSCRIBE_URL",
+      "notes": [
+        "Replace CHANNEL_SUBSCRIBE_URL with the real Rich Mantra subscription URL when available.",
+        "Keep the two repeated subscribe links, matching the reference pattern.",
+        "Use plain text line breaks, not markdown bullets, in final YouTube descriptions."
+      ]
+    },
+    "hashtag_style": {
+      "count": 3,
+      "format": "#keyword #keyword #keyword",
+      "examples": [
+        "#investing #personalfinance #financialfreedom",
+        "#etf #investing #wealthbuilding",
+        "#healthinsurance #moneytips #financialfreedom"
+      ]
+    },
+    "base_tags": [
+      "Rich Mantra",
+      "Josh",
+      "money",
+      "wealth",
+      "investing",
+      "personal finance",
+      "financial freedom",
+      "financial independence",
+      "portfolio",
+      "savings",
+      "emergency fund",
+      "ETFs",
+      "stock market",
+      "long term investing",
+      "beginner investing guide",
+      "how to build wealth",
+      "passive income",
+      "finance",
+      "business",
+      "investment",
+      "financial education",
+      "how to get rich",
+      "self improvement",
+      "personal development",
+      "success"
+    ],
+    "localized": {
+      "use_same_title": true,
+      "use_same_description": true
+    }
+  }
+}

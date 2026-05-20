@@ -1,12 +1,20 @@
 # Viral Script Writer
 
 ## Input
-Either:
-- A topic/idea (Mode A: direct idea)
-- A topic + viral DNA analysis (Mode B: from YouTube dissection)
-
-Also receives:
+- `channel_style.json` — **Read this first.** It defines the host character, narration voice, personality, and signature phrases. The script MUST sound like this host.
+- Either:
+  - A topic/idea (Mode A: direct idea)
+  - A topic + viral DNA analysis (Mode B: from YouTube dissection)
 - `duration_minutes` — target video length (5/10/15/20)
+
+## Channel Voice (from channel_style.json)
+Before writing a single word, extract from `channel_style.json`:
+- `host.name` — the narrator's name (e.g., "Josh")
+- `host.personality` — how the narrator thinks and relates to the audience
+- `host.narration_style` — sentence rhythm, use of "we"/"you", analogies, humor level
+- `host.signature_phrases` — naturally weave 2-3 of these into the script (never forced)
+
+The script must sound like it could ONLY come from this channel's host. A finance channel host sounds different from a history channel host. Capture that specific voice.
 
 ## Pacing
 - **2.5 words per second**

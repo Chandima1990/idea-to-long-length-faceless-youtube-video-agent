@@ -3,6 +3,17 @@
 ## Overview
 This pipeline takes an idea (or YouTube URL) and produces a long-form viral YouTube video (5-20 min) using AI-generated static B-roll images with Ken Burns effects, word-level karaoke captions, and optional film grain.
 
+## MANDATORY: Read Channel Style Guide First
+Before doing ANYTHING else, read `channel_style.json` in the project root.
+
+This file defines:
+- The channel's host character (name, personality, physical look, voice)
+- The base visual style for all videos
+- Thumbnail rules (host position, text layout, accent colors)
+- Narration tone and signature phrases
+
+Every pipeline stage (script, style card, scenes, thumbnail, article) MUST align with `channel_style.json`. Do not skip this step.
+
 ## Dependencies Check
 Before starting, run:
 ```bash
@@ -57,12 +68,13 @@ run = create_run(title="<topic>", mode="idea"|"viral_dna", voice="josh", film_pr
 
 ### Step 3: Style Card + Characters + Scene Breakdown
 1. Read `skills/cinematographic-breakdown.md`
-2. Read `outputs/<run_id>/script.md`
-3. Generate:
-   - Style Card → save to `outputs/<run_id>/style.json`
-   - Characters → save to `outputs/<run_id>/characters.json`
-   - Scene breakdown → save to `outputs/<run_id>/scenes.json`
-4. Update state for all three stages
+2. Read `channel_style.json` (already read at top — confirm you have it loaded)
+3. Read `outputs/<run_id>/script.md`
+4. Generate:
+   - Style Card → base on `channel_style.visual_style`, adapt to topic → save to `outputs/<run_id>/style.json`
+   - Characters → ALWAYS include host from `channel_style.host` as first entry → save to `outputs/<run_id>/characters.json`
+   - Scene breakdown → use channel thumbnail rules for `thumbnail_prompt` → save to `outputs/<run_id>/scenes.json`
+5. Update state for all three stages
 
 ### Step 3b: Write Medium Article
 1. Read `skills/article-writer.md`

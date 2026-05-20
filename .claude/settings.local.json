@@ -26,7 +26,10 @@
       "Bash(Get-Content *)",
       "Bash(python -m lib.pipeline --stage render --run-id 2026-05-08_051557_starting-a-business-vs-investing-in-the-)",
       "Bash(python -m lib.pipeline --stage thumbnail --run-id 2026-05-08_051557_starting-a-business-vs-investing-in-the-)",
-      "Bash(python -m lib.pipeline --stage metadata --run-id 2026-05-08_051557_starting-a-business-vs-investing-in-the-)"
+      "Bash(python -m lib.pipeline --stage metadata --run-id 2026-05-08_051557_starting-a-business-vs-investing-in-the-)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\emcc1\\\\Downloads\\\\Repos\\\\remotion videos\\\\YashAiGuy\\\\idea-to-long-length-faceless-youtube-video-agent\" -Force)",
+      "Bash(Select-Object Name, PSIsContainer)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\emcc1\\\\Downloads\\\\Repos\\\\remotion videos\\\\YashAiGuy\\\\idea-to-long-length-faceless-youtube-video-agent\" -File | Where-Object {$_.Name -match \"\\\\.json$|\\\\.yaml$|\\\\.yml$|config\"})"
     ]
   }
 }

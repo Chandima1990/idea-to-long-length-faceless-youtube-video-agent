@@ -1,13 +1,20 @@
 # Cinematographic Breakdown
 
 ## Input
+- `channel_style.json` — **Read this first.** It defines the channel's base visual style, host character (physical description), and thumbnail rules. All three parts of this breakdown must align with it.
 - `outputs/<run_id>/script.md` — the narration script
 - `duration_minutes` — target length
 
 ## Process
 
 ### Part 1: STYLE CARD
-Read the entire script and derive a unified visual style:
+Read `channel_style.json` (`visual_style` section) and the script, then derive a unified visual style.
+
+**Rules for style derivation:**
+- Start from `channel_style.visual_style.style_suffix_base` — this is the brand DNA that MUST appear in every video's style_suffix
+- Adapt the style to the video's specific topic (e.g., for a finance video: add "clean financial infographic elements"; for a history video: add "cinematic period-accurate documentary")
+- The `style_suffix` you generate must include the channel's base elements PLUS topic-specific elements
+- Never create a style that contradicts the channel's `visual_style.mood` or `visual_style.photographic_style`
 
 ```json
 {
@@ -28,11 +35,23 @@ The `style_suffix` is the KEY to consistency. It gets appended word-for-word to 
 > "cinematic documentary photography, photorealistic, earth tones, natural lighting, shot on RED V-Raptor, 8K detail"
 
 ### Part 2: CHARACTERS
-Parse the script for any recurring people/characters. For each, create a character card:
+Read `channel_style.json` (`host` section) first.
+
+**Always include the channel host** as the first character entry, using `channel_style.host.physical_description` verbatim as their `description`. The host's `id` is their name lowercased (e.g., `"josh"`). Scan the script for scenes where the narration uses first-person action ("I tried", "I asked", "I found", "I looked") or explicitly calls out the host — those are the `appears_in_scenes` values.
+
+If `channel_style.host.appears_in_broll` is `false`, set `appears_in_scenes` to an empty array (host is voice-only).
+
+Then parse the script for any OTHER recurring people/characters and add them:
 
 ```json
 {
   "characters": [
+    {
+      "id": "josh",
+      "name": "Josh",
+      "description": "[copy channel_style.host.physical_description verbatim here]",
+      "appears_in_scenes": [2, 8, 15]
+    },
     {
       "id": "george",
       "name": "George Hadley",
@@ -44,8 +63,6 @@ Parse the script for any recurring people/characters. For each, create a charact
 ```
 
 Save to `outputs/<run_id>/characters.json`
-
-If no recurring characters (e.g., a nature documentary), save empty array.
 
 ### Part 3: SCENE BREAKDOWN
 Split the script into visual segments. Each segment = one B-roll image.
@@ -122,12 +139,23 @@ Save to `outputs/<run_id>/scenes.json`:
   "title": "video title",
   "description": "YouTube description (2-3 sentences + keywords)",
   "tags": ["tag1", "tag2"],
-  "thumbnail_prompt": "YouTube thumbnail, 16:9. Cartoon animated bald overweight man with glasses showing shocked/worried expression, bold black outlines, flat Family-Guy-style cartoon. Character on the right side. Left side: large bold white text on dark red background with the video's key hook (2-4 words, ALL CAPS). Center: simple flat cartoon graphic illustrating the video's core concept (chart, icon, dollar sign, etc.). Dark charcoal background, high-contrast yellow and red accents, bold black outlines on all elements, flat 2D cartoon style, no gradients, no photorealism.",
+  "thumbnail_prompt": "[Generated from channel_style.json — see Thumbnail Prompt Rules below]",
   "total_scenes": 60,
   "total_duration_seconds": 600,
   "scenes": [...]
 }
 ```
+
+### THUMBNAIL PROMPT RULES
+Read `channel_style.json` (`thumbnail` section) and compose the `thumbnail_prompt` by filling in this template from `thumbnail.thumbnail_prompt_template`:
+
+1. Replace `HOST_DESCRIPTION` with `thumbnail.host_image_description`
+2. Replace `REACTION_TYPE` with a reaction appropriate for the video topic (surprised / excited / concerned / intrigued)
+3. Replace `VIDEO_HOOK` with 2-5 word ALL-CAPS version of the video's core hook
+4. Replace `ACCENT_COLOR` with one of the `thumbnail.accent_colors` (pick the one that fits the emotional tone)
+5. Replace `BACKGROUND_STYLE` with `thumbnail.background_style`
+
+If `thumbnail.include_host` is `false`, omit the host from the prompt entirely and use a bold graphic/icon composition instead.
 
 ## Quality Checks
 1. All narration_text concatenated = original script (no words added or lost)
