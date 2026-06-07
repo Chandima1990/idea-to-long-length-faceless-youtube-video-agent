@@ -1,19 +1,16 @@
 {
   "_readme": "This file defines the channel's style for the video generation agent. All scripts, scenes, thumbnails, and metadata must align with the Applied Philosophy, Psychology, and Stoicism niche and the meditative minimalist visual tone defined here.",
-
   "reference_sample": {
     "run_id": "2026-01-15_090000_the-stoic-trick-your-mind-uses",
     "title": "The Stoic Trick Your Mind Uses to Quietly Destroy Your Future",
     "style_summary": "Dark cinematic minimalism with single warm light sources, ancient stone and parchment textures, sparse symbolic objects, and a slow meditative pace that rewards contemplative viewers."
   },
-
   "channel": {
     "name": "Eternal Wisdom",
     "niche": "Applied Philosophy, Psychology, and Stoicism — practical ancient wisdom reframed through modern psychological research",
     "target_audience": "Thoughtful 28-50 year olds who feel intellectually under-stimulated, are quietly struggling with anxiety, ambition, or meaning, and who distrust motivational content but are deeply drawn to rigorous ideas that actually change how they think. Professionals, readers, and former students who want philosophy that applies on a Tuesday morning.",
     "tone": "Calm, precise, slightly unsettling. Sounds like a philosopher who has genuinely thought about this for years and is finally telling you the part everyone else skips. Not motivational. Not lecturing. Intimate and unhurried, like a late-night conversation that changes something permanently."
   },
-
   "host": {
     "name": "Elias",
     "role": "narrator and channel persona",
@@ -33,7 +30,6 @@
     "appears_in_broll": false,
     "broll_note": "B-roll uses no host figure. Scenes are composed of symbolic still-life objects: open ancient books, single candles, hourglasses, worn stone surfaces, empty corridors, still water, shadows of tree branches, classical sculpture fragments, aged parchment, ink spreading in water. No people, no modern environments, no bright colors. Every image should feel like it belongs in a museum of the mind."
   },
-
   "visual_style": {
     "base_style_name": "Dark Cinematic Minimalism",
     "photographic_style": "Cinematic still-life photography meets classical oil painting aesthetics — deeply shadowed compositions with a single warm amber or cool silver light source illuminating sparse symbolic objects against near-black backgrounds",
@@ -55,7 +51,6 @@
     "style_suffix_base": "Cinematic dark minimalist photography, single warm amber candlelight or cool silver moonlight as sole light source, deep charcoal and near-black backgrounds with chiaroscuro shadows occupying 60% of frame, sparse symbolic still-life composition, single ancient or natural object in sharp focus, subtle film grain, shallow depth of field, aged parchment and worn stone textures, no text, no people, no modern objects, meditative and austere mood, oil painting meets cinematic photography aesthetic, 16:9 aspect ratio.",
     "style_guide_note": "This channel's visual language must feel like the interior of a mind that has been thinking for a very long time. Resist any impulse toward dynamism, color, or modernity. If an image could appear in a YouTube finance video or a tech explainer, it is wrong for this channel. If it could hang in a gallery of Dutch Golden Age still-life paintings, it is correct."
   },
-
   "thumbnail": {
     "include_host": true,
     "thumbnail_character": "Contemplative middle-aged man with sharp classical features, silver-templed dark hair, composed and serious expression, dark collarless shirt, semi-realistic painted portrait style with dramatic chiaroscuro lighting",
@@ -68,7 +63,6 @@
     "thumbnail_prompt_template": "YouTube thumbnail composition, 16:9 aspect ratio. Semi-realistic painted portrait character: contemplative middle-aged man with sharp classical features, silver-templed dark hair, intense focused gaze, dark collarless shirt, dramatic chiaroscuro lighting with warm amber on one side and deep shadow on the other, bold clean outline. Character positioned on the right side of frame emerging from shadow. Left side features large bold serif headline text in aged ivory or warm white reading VIDEO_HOOK on a dark semi-transparent background panel, with a shorter amber secondary line reading SECONDARY_HOOK below. Center of frame shows SYMBOLIC_OBJECT dramatically lit — an hourglass, open ancient book, single candle, or cracked stone. Deep charcoal near-black background, single warm ambient light source, painterly cinematic aesthetic, no gradients, high contrast between light and shadow, austere and meditative mood.",
     "reference_prompt_pattern": "Left panel: bold ivory serif text on dark background reading THE MIND YOU THINK YOU HAVE. Amber secondary line: IS NOT YOUR MIND. Center: single lit candle casting long shadow on aged stone surface. Right: contemplative silver-templed man in dark shirt emerging from shadow, composed serious expression, warm amber light on left cheek."
   },
-
   "script_style": {
     "hook_pattern": "Open with a single precise observation about human psychology or a named philosophical idea that immediately creates a sense of uncomfortable recognition. Do not announce the topic — embody it. The first sentence should make the viewer feel that they have been quietly understood by someone who has thought about this far longer than they have.",
     "opening_examples": [
@@ -95,7 +89,6 @@
     ],
     "cta_style": "Place a single quiet, non-urgent subscription mention at approximately the 25% mark, framed as an intellectual community rather than a channel growth appeal. Example: 'If this kind of thinking is useful to you, there is more of it here.' Never use hard-sell language, never repeat the CTA, never place it at the end over a loud outro. The monetization strategy depends on completion rate, not click-throughs — do nothing that interrupts the meditative flow."
   },
-
   "youtube_metadata": {
     "_readme": "Metadata for Eternal Wisdom. Titles must provoke immediate intellectual curiosity and Browse Feature clicks from premium demographics. Descriptions function as standalone philosophical summaries. Tags target the intersection of philosophy, psychology, and self-understanding.",
     "category_id": "27",
@@ -160,5 +153,14 @@
       "use_same_title": true,
       "use_same_description": true
     }
+  },
+  "upload_schedule": {
+    "preferred_days": [
+      "thursday",
+      "friday",
+      "saturday"
+    ],
+    "hour_utc": 17,
+    "note": "17:00 UTC = 12pm EST — contemplative/philosophy audience peaks mid-afternoon and weekends"
   }
 }

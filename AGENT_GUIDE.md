@@ -22,10 +22,21 @@ Before starting, run:
 PYTHONPATH=/Users/psrmanju2/psr_workspace/idea-to-long-viral-static-broll python3 -m lib.pipeline --check
 ```
 
-## Two Input Modes
+## Input Modes
 
 ### Mode A: From Idea
 User provides a topic/idea directly. Skip to Step 2.
+
+### Mode C: Research-First (optional — only when user asks)
+Triggered by phrases like: "give me ideas", "research ideas", "what should I make next",
+"find me topics", "do research for the channel."
+Do NOT trigger for any other request — if the user gives a topic, go to Mode A directly.
+
+1. Read `skills/idea-researcher.md`
+2. Run the full research process (competitor analysis, Reddit/forums, trending news, gap analysis)
+3. Present 4-6 ideas with hook, plot, viral trigger, and evidence
+4. Wait for user to pick one
+5. Proceed to Step 1 with the chosen idea (carry the hook and plot into the script stage)
 
 ### Mode B: From YouTube URL
 1. Run viral DNA extraction:

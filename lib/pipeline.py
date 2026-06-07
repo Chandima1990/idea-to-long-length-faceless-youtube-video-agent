@@ -263,6 +263,26 @@ def stage_metadata(run_id: str):
     print(f"  Tags:        {tags_str[:80]}...")
 
 
+def _next_upload_slot(preferred_days: list, hour_utc: int, min_hours_ahead: int = 2) -> str:
+    """Return the next ISO 8601 UTC datetime on a preferred weekday at hour_utc,
+    at least min_hours_ahead hours from now."""
+    from datetime import datetime, timezone, timedelta
+    day_map = {"monday": 0, "tuesday": 1, "wednesday": 2, "thursday": 3,
+               "friday": 4, "saturday": 5, "sunday": 6}
+    preferred_nums = [day_map[d.lower()] for d in preferred_days]
+    now = datetime.now(timezone.utc)
+    earliest = now + timedelta(hours=min_hours_ahead)
+    for offset in range(8):
+        candidate = (now + timedelta(days=offset)).replace(
+            hour=hour_utc, minute=0, second=0, microsecond=0)
+        if candidate.weekday() in preferred_nums and candidate >= earliest:
+            return candidate.strftime("%Y-%m-%dT%H:%M:%S.000Z")
+    # Fallback: first preferred day next week
+    fallback = (now + timedelta(days=7)).replace(
+        hour=hour_utc, minute=0, second=0, microsecond=0)
+    return fallback.strftime("%Y-%m-%dT%H:%M:%S.000Z")
+
+
 def stage_upload(run_id: str):
     if not YOUTUBE_CLIENT_ID:
         print("[UPLOAD] Skipped — YOUTUBE_CLIENT_ID not set in .env")
@@ -288,10 +308,21 @@ def stage_upload(run_id: str):
     channel_style = json.loads(CHANNEL_STYLE_PATH.read_text(encoding='utf-8'))
     category_id = channel_style.get("youtube_metadata", {}).get("category_id", "22")
 
-    print(f"[UPLOAD] Uploading to YouTube as private draft...")
-    print(f"  Title: {title}")
+    # Determine scheduled publish time from channel upload_schedule
+    schedule = channel_style.get("upload_schedule", {})
+    publish_at = None
+    if schedule:
+        preferred_days = schedule.get("preferred_days", [])
+        hour_utc = schedule.get("hour_utc", 18)
+        publish_at = _next_upload_slot(preferred_days, hour_utc)
+        print(f"[UPLOAD] Scheduled for: {publish_at}  ({schedule.get('note','')})")
+    else:
+        print(f"[UPLOAD] No upload_schedule in channel JSON — uploading as private draft")
+
+    print(f"[UPLOAD] Uploading: {title}")
     update_stage(run_id, "upload", "in_progress")
-    video_id = upload_video(final_path, title, description, tags, category_id=category_id, privacy="private")
+    video_id = upload_video(final_path, title, description, tags,
+                            category_id=category_id, publish_at=publish_at)
     url = f"https://youtu.be/{video_id}"
     update_stage(run_id, "upload", "complete", url)
     print(f"[UPLOAD] Done: {url}")

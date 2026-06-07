@@ -1,19 +1,16 @@
 {
   "_readme": "This file defines the channel's style. It is now based on the reference output: outputs/2026-05-07_093140_what-nobody-tells-you-about-your-401k. All future scripts, scene prompts, thumbnails, metadata, and article assets should follow this style unless the user explicitly overrides it.",
-
   "reference_sample": {
     "run_id": "2026-05-07_093140_what-nobody-tells-you-about-your-401k",
     "title": "What Nobody Tells You About Your 401k (They Are Quietly Taking Your Money)",
     "style_summary": "Urgent personal-finance explainer with flat 2D vector infographic scenes, white backgrounds, bold outlines, clear red/green/blue financial icons, and high-contrast cartoon thumbnails."
   },
-
   "channel": {
     "name": "Rich Mantra",
     "niche": "personal finance, investing, retirement, ETFs, hidden money leaks, and financial freedom",
     "target_audience": "25-45 year olds who want practical investing and money guidance, especially people who suspect they are missing hidden rules, fees, risks, or opportunities",
     "tone": "direct, urgent, useful, slightly angry at unfair money systems, but still clear and accessible. Sounds like a smart friend showing the viewer where money is quietly leaking."
   },
-
   "host": {
     "name": "Josh",
     "role": "narrator and channel persona",
@@ -42,7 +39,6 @@
     ],
     "broll_note": "Josh appears selectively in B-roll scenes. When included, use broll_character_prompt verbatim as the character description. Match pose and expression to scene emotion: pointing up for insights, concerned or gesturing for warnings, neutral presenting for explanations, thumbs up for positive outcomes. Reference art: channels/channel_art/rich_mantra_character_josh.png"
   },
-
   "visual_style": {
     "base_style_name": "Flat 2D Vector Infographic",
     "photographic_style": "flat 2D vector illustration, infographic style, bold clean outlines, solid color fills",
@@ -64,7 +60,6 @@
     "style_suffix_base": "Flat 2D vector illustration, infographic style, bold clean outlines, solid color fills, no gradients, no shadows, no photorealism, white background, modern minimal design, geometric shapes, clean finance icons, red and green accents, 16:9 aspect ratio.",
     "style_guide_note": "This channel's main video visuals should look like educational finance infographics, not stock footage or realistic documentary images."
   },
-
   "thumbnail": {
     "include_host": true,
     "thumbnail_character": "32-year-old man with short dark brown hair, short dark beard, average build, light skin, light sky-blue casual shirt and dark navy pants. Flat vector cartoon illustration style, bold black outlines, expressive shocked or worried face. No glasses.",
@@ -77,7 +72,6 @@
     "thumbnail_prompt_template": "YouTube thumbnail composition, 16:9 aspect ratio. Cartoon animated character: 32-year-old man with short dark brown hair and short dark beard, average build, light skin, light sky-blue casual short-sleeve shirt, dark navy pants, no glasses. Bold black outlines, flat vector cartoon illustration style. Character on the right side showing a shocked open-mouth expression or worried reaction. Left side has large bold white text on dark red background reading VIDEO_HOOK, with a smaller yellow line below reading SECONDARY_HOOK. Center has SIMPLE_FINANCE_VISUAL with green money/chart elements being attacked or exposed by red warning arrows, fees, bills, or danger icons. Dark charcoal background, high contrast yellow and red accents, bold black outlines on all elements, flat 2D cartoon illustration style, no gradients, no photorealism, no shadows, bright saturated colors.",
     "reference_prompt_pattern": "Left side red block: NOBODY TELLS YOU THIS. Bottom yellow/white line: YOUR 401k. Center: green bar chart being eaten by red FEES arrow. Right: shocked dark-haired bearded man in blue shirt with hands raised."
   },
-
   "script_style": {
     "hook_pattern": "Start with a personal frustration or uncomfortable truth, then immediately attach a big concrete loss number or hidden mechanism.",
     "opening_examples": [
@@ -102,7 +96,6 @@
     ],
     "cta_style": "If used, place a short subscribe CTA early after the hook, framed around stopping money leaks or learning the rules most people miss. Do not end with a long hard-sell CTA."
   },
-
   "youtube_metadata": {
     "_readme": "Use metadata patterns from the 401k reference output. Keep titles searchable but emotionally sharp. Descriptions should summarize the hidden problem, the mechanism, the financial stakes, and the action step.",
     "category_id": "27",
@@ -159,5 +152,14 @@
       "use_same_title": true,
       "use_same_description": true
     }
+  },
+  "upload_schedule": {
+    "preferred_days": [
+      "wednesday",
+      "tuesday",
+      "thursday"
+    ],
+    "hour_utc": 19,
+    "note": "19:00 UTC = 2pm EST — US afternoon before peak engagement"
   }
 }

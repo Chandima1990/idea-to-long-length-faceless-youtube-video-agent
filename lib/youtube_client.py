@@ -22,10 +22,18 @@ def _access_token() -> str:
 
 
 def upload_video(video_path: Path, title: str, description: str, tags: list,
-                 category_id: str = "22", privacy: str = "private") -> str:
+                 category_id: str = "22", privacy: str = "private",
+                 publish_at: str = None) -> str:
+    """Upload a video. If publish_at (ISO 8601 UTC) is set, schedules it for that time
+    and ignores the privacy arg (YouTube requires privacyStatus=private for scheduling)."""
     video_path = Path(video_path)
     file_size = video_path.stat().st_size
     token = _access_token()
+
+    status = {"privacyStatus": "private" if publish_at else privacy,
+              "selfDeclaredMadeForKids": False}
+    if publish_at:
+        status["publishAt"] = publish_at
 
     metadata = {
         "snippet": {
@@ -34,10 +42,7 @@ def upload_video(video_path: Path, title: str, description: str, tags: list,
             "tags": tags,
             "categoryId": category_id,
         },
-        "status": {
-            "privacyStatus": privacy,
-            "selfDeclaredMadeForKids": False,
-        },
+        "status": status,
     }
 
     # Initiate resumable upload session

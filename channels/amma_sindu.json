@@ -1,12 +1,10 @@
 {
   "_readme": "Amma Sindu — Sri Lankan Sinhala song video channel. Songs are written by the user's mother. Visual style is pastel, cartoonish, and 2D/3D animation-inspired. Audio is generated externally via Suno AI and placed manually into the output folder — the TTS stage is SKIPPED for this channel. The agent's input is song lyrics (Sinhala), an optional English translation, and optional per-song style instructions. The fallback visual style is soft pastel 2D cartoon illustration.",
-
   "reference_sample": {
     "run_id": "",
     "title": "",
     "style_summary": "No reference sample yet. First production video will become the reference."
   },
-
   "channel": {
     "name": "Amma Sindu",
     "niche": "Original Sinhala songs written by a Sri Lankan mother — lyric and story videos for Facebook and YouTube",
@@ -16,21 +14,18 @@
     "platform": "Facebook (primary), YouTube (secondary)",
     "captions_enabled": false
   },
-
   "host": {
     "name": null,
     "role": "No on-screen narrator or recurring presenter. This is a lyric story video channel. There is no host character.",
     "appears_in_broll": false,
     "broll_note": "No recurring host. Each song may have its own story characters defined per video in characters.json. Characters should be illustrated in a style consistent with the song's visual theme — soft cartoon, culturally appropriate Sri Lankan appearance, pastel or warm tones."
   },
-
   "audio": {
     "source": "Suno AI — generated externally by the user",
     "workflow_note": "SKIP the TTS stage entirely for this channel. The user will generate the song audio using Suno AI and manually place the file as narration.mp3 inside the run output folder. Once placed, proceed directly to the timestamps stage.",
     "placement_instruction": "User places the Suno AI audio file at: outputs/<run_id>/narration.mp3. Then run: python -m lib.pipeline --stage timestamps --run-id <run_id>",
     "tts_stage": "SKIP"
   },
-
   "visual_style": {
     "base_style_name": "Soft Pastel 2D Cartoon Animation",
     "photographic_style": "soft pastel 2D cartoon illustration, gentle animation feel, smooth rounded outlines, storybook quality",
@@ -53,7 +48,6 @@
     "style_suffix_base": "Soft pastel 2D cartoon illustration, gentle watercolor-wash atmosphere, smooth rounded outlines, warm dreamy lighting, emotionally expressive characters, Sri Lankan cultural elements where appropriate, no photorealism, no sharp geometric infographic shapes, 16:9 aspect ratio.",
     "style_guide_note": "Visuals should feel like a gentle animated storybook that honours the feeling of the song. Style varies per song. Always read the song-specific style instruction before generating the style card."
   },
-
   "lyric_style": {
     "input_format": "Song lyrics provided in Sinhala. English translation provided as a workflow reference if needed. Optional per-song style instruction also provided.",
     "scene_mapping": "Each lyric line or couplet maps to one visual scene. Scenes should illustrate the imagery, emotion, and story of the lyrics — not simply show text on screen.",
@@ -71,7 +65,6 @@
     "scene_duration_note": "Scene durations are driven by the audio from Suno AI, not by word count. After timestamps are extracted from the audio, the rescaling stage aligns scene durations to the actual audio automatically.",
     "no_tts_note": "Do not write a narration script. The script.md file for this channel should contain the song lyrics only, formatted line by line. Do not add stage directions, headings, or prose."
   },
-
   "thumbnail": {
     "include_host": false,
     "background_style": "soft pastel gradient background matching the song's emotional tone — warm peach and gold for devotional songs, soft pink and lavender for love or longing songs, sky blue and mint for nature or children's songs",
@@ -80,7 +73,6 @@
     "overall_style": "warm, inviting, emotionally resonant music video thumbnail. Soft pastel 2D cartoon illustration with the song title and a central visual representing the song's core image or feeling. Should feel gentle and beautiful, not high-contrast or aggressive.",
     "thumbnail_prompt_template": "Facebook music video thumbnail, 16:9 aspect ratio. Soft pastel 2D cartoon illustration. SONG_MOOD_COLOR gentle gradient background. Centered composition showing SONG_CENTRAL_IMAGE that represents the core emotion or story of the song. Song title SONG_TITLE in elegant bold Sinhala-style text centered in the frame. Soft floral or nature decorative border elements. Warm dreamy atmosphere, smooth cartoon style, gentle rounded outlines, emotionally expressive, Sri Lankan cultural aesthetic, no photorealism, no harsh contrast, no finance icons."
   },
-
   "youtube_metadata": {
     "_readme": "Music channel in Sinhala. Titles use the song name. Descriptions credit the songwriter and describe the song's theme briefly.",
     "category_id": "10",
@@ -133,7 +125,6 @@
       "use_same_description": true
     }
   },
-
   "pipeline_notes": {
     "tts_stage": "SKIP — place Suno AI audio as narration.mp3 in the output folder, then run timestamps directly.",
     "script_stage": "Write song lyrics only (Sinhala), line by line. No prose narration. Save to outputs/<run_id>/script.md.",
@@ -145,5 +136,14 @@
       "English translation (optional — for agent reference only)",
       "Per-song visual style instruction (optional — overrides visual_style defaults)"
     ]
+  },
+  "upload_schedule": {
+    "preferred_days": [
+      "saturday",
+      "sunday",
+      "tuesday"
+    ],
+    "hour_utc": 14,
+    "note": "14:00 UTC = 7:30pm Sri Lanka time — prime evening for SL diaspora + local audience"
   }
 }
