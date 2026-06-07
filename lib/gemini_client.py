@@ -4,7 +4,7 @@ from pathlib import Path
 from google import genai
 from google.genai import types
 
-from lib.config import GEMINI_API_KEY, GEMINI_IMAGE_MODEL
+from lib.config import GEMINI_API_KEY, GEMINI_IMAGE_MODEL, GEMINI_IMAGE_SIZE
 
 
 def _client() -> genai.Client:
@@ -13,6 +13,11 @@ def _client() -> genai.Client:
 
 def _is_imagen_model(model: str) -> bool:
     return "imagen" in model.lower()
+
+
+def _image_size_or_none() -> str | None:
+    value = (GEMINI_IMAGE_SIZE or "").strip()
+    return value or None
 
 
 def generate_image(prompt: str, output_path: Path, max_retries: int = 6) -> Path:
@@ -30,6 +35,7 @@ def generate_image(prompt: str, output_path: Path, max_retries: int = 6) -> Path
                     config=types.GenerateImagesConfig(
                         number_of_images=1,
                         aspect_ratio="16:9",
+                        image_size=_image_size_or_none(),
                         output_mime_type="image/png",
                     ),
                 )
@@ -42,9 +48,10 @@ def generate_image(prompt: str, output_path: Path, max_retries: int = 6) -> Path
                     model=GEMINI_IMAGE_MODEL,
                     contents=prompt,
                     config=types.GenerateContentConfig(
-                        response_modalities=["IMAGE"],
+                        response_modalities=["TEXT", "IMAGE"],
                         image_config=types.ImageConfig(
                             aspect_ratio="16:9",
+                            image_size=_image_size_or_none(),
                         ),
                     ),
                 )

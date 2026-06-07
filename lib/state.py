@@ -32,6 +32,7 @@ def create_run(title: str, mode: str, voice: str, film_preset: str, duration_min
             "tts": {"status": "pending"},
             "timestamps": {"status": "pending"},
             "images": {"status": "pending"},
+            "image_review": {"status": "pending"},
             "render": {"status": "pending"},
             "thumbnail": {"status": "pending"},
             "metadata": {"status": "pending"},

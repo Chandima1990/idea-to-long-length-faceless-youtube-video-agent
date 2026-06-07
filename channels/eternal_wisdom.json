@@ -1,0 +1,164 @@
+{
+  "_readme": "This file defines the channel's style for the video generation agent. All scripts, scenes, thumbnails, and metadata must align with the Applied Philosophy, Psychology, and Stoicism niche and the meditative minimalist visual tone defined here.",
+
+  "reference_sample": {
+    "run_id": "2026-01-15_090000_the-stoic-trick-your-mind-uses",
+    "title": "The Stoic Trick Your Mind Uses to Quietly Destroy Your Future",
+    "style_summary": "Dark cinematic minimalism with single warm light sources, ancient stone and parchment textures, sparse symbolic objects, and a slow meditative pace that rewards contemplative viewers."
+  },
+
+  "channel": {
+    "name": "Eternal Wisdom",
+    "niche": "Applied Philosophy, Psychology, and Stoicism — practical ancient wisdom reframed through modern psychological research",
+    "target_audience": "Thoughtful 28-50 year olds who feel intellectually under-stimulated, are quietly struggling with anxiety, ambition, or meaning, and who distrust motivational content but are deeply drawn to rigorous ideas that actually change how they think. Professionals, readers, and former students who want philosophy that applies on a Tuesday morning.",
+    "tone": "Calm, precise, slightly unsettling. Sounds like a philosopher who has genuinely thought about this for years and is finally telling you the part everyone else skips. Not motivational. Not lecturing. Intimate and unhurried, like a late-night conversation that changes something permanently."
+  },
+
+  "host": {
+    "name": "Elias",
+    "role": "narrator and channel persona",
+    "personality": "Elias is deeply read, unhurried, and a little austere. He does not comfort the viewer — he asks them to see something clearly. He has genuine respect for the ancient thinkers and treats Stoicism, Existentialism, and depth psychology not as self-help tools but as precision instruments for understanding the human condition. He is never angry, never urgent, never flashy. His power comes entirely from stillness and the weight of a well-placed observation.",
+    "narration_style": "Slow, deliberate, meditative. Long sentences that build carefully, broken occasionally by a single short line that lands like a stone dropped in still water. He uses the second person 'you' to make abstract philosophy feel personally addressed. He names the philosophers and their ideas with quiet authority, never summarizing — always deepening. Pacing is 20-30% slower than typical YouTube narration. Silence and breath are part of the delivery.",
+    "signature_phrases": [
+      "The Stoics understood something about this that took me years to accept",
+      "Most people never reach this question. You are reaching it now",
+      "This is where the philosophy stops being comfortable",
+      "Epictetus did not say this to inspire you. He said it to stop you",
+      "There is a word for this in the ancient texts",
+      "Sit with that for a moment",
+      "This is the part they never put on the poster"
+    ],
+    "physical_description": "A contemplative middle-aged man with sharp classical features, short dark hair with distinguished silver temples, a calm and focused gaze that suggests deep thought rather than emotion. He wears a simple dark collarless shirt or dark turtleneck. Rendered in a semi-realistic painted portrait style with soft chiaroscuro lighting — warm amber from one side, deep shadow on the other. No smile. Expression is composed, intelligent, slightly melancholic.",
+    "voice": "prof",
+    "appears_in_broll": false,
+    "broll_note": "B-roll uses no host figure. Scenes are composed of symbolic still-life objects: open ancient books, single candles, hourglasses, worn stone surfaces, empty corridors, still water, shadows of tree branches, classical sculpture fragments, aged parchment, ink spreading in water. No people, no modern environments, no bright colors. Every image should feel like it belongs in a museum of the mind."
+  },
+
+  "visual_style": {
+    "base_style_name": "Dark Cinematic Minimalism",
+    "photographic_style": "Cinematic still-life photography meets classical oil painting aesthetics — deeply shadowed compositions with a single warm amber or cool silver light source illuminating sparse symbolic objects against near-black backgrounds",
+    "color_palette": "Near-black and deep charcoal as dominant background tones. Warm amber and aged gold for primary light and accent. Cool blue-grey for secondary philosophical or introspective scenes. Faded ivory or aged parchment white for neutral elements. Absolute avoidance of saturated primary colors, bright backgrounds, or modern visual noise.",
+    "lighting": "Single directional light source only — either warm candlelight amber from below or one side, or cool diffused silver from above suggesting moonlight or dawn. Deep chiaroscuro shadows occupying 60-70% of the frame. No fill lights. No flat even lighting. Darkness is compositional, not accidental.",
+    "camera": "Centered or slightly off-center compositions with extreme negative space. Low angles for objects that convey weight and permanence. Tight detail shots of textures: the grain of stone, the edge of a page, the surface of still water. Shallow depth of field with soft bokeh on backgrounds. No dynamic movement implied — every composition feels paused, suspended, eternal.",
+    "texture": "Heavy emphasis on physical texture: worn stone, aged parchment, rough linen, cracked marble, oxidized bronze, candle wax drips, ink-stained paper. Subtle film grain overlay on all images to add temporal depth. No smooth digital surfaces, no plastic or glass, no modern materials.",
+    "mood": "Meditative, austere, timeless, slightly melancholic — the feeling of sitting alone in an ancient library at night and understanding something irreversible about yourself",
+    "scene_rules": [
+      "Use near-black or deep charcoal backgrounds for all primary scenes. No white or bright backgrounds.",
+      "Every scene must contain exactly one primary symbolic object: a candle, an hourglass, a stone, an open book, a quill, a cracked column, still water, or a fragment of classical sculpture.",
+      "Use amber and warm gold for scenes about action, virtue, and agency. Use cool blue-grey for scenes about mortality, impermanence, and acceptance.",
+      "No photorealistic modern humans, no contemporary settings, no digital devices, no bright artificial light sources.",
+      "Text inside scene images is strictly forbidden. No labels, no captions, no UI elements within the generated image.",
+      "Depth of field must always leave the background in soft focus. The symbolic object in the foreground is sharp; everything else dissolves.",
+      "Alternate between extreme close-up detail shots (texture of stone, single flame, ink on parchment) and wider sparse compositions to control pacing rhythm.",
+      "Every image must feel as though it could have been painted in the 17th century — timeless, not dateable."
+    ],
+    "style_suffix_base": "Cinematic dark minimalist photography, single warm amber candlelight or cool silver moonlight as sole light source, deep charcoal and near-black backgrounds with chiaroscuro shadows occupying 60% of frame, sparse symbolic still-life composition, single ancient or natural object in sharp focus, subtle film grain, shallow depth of field, aged parchment and worn stone textures, no text, no people, no modern objects, meditative and austere mood, oil painting meets cinematic photography aesthetic, 16:9 aspect ratio.",
+    "style_guide_note": "This channel's visual language must feel like the interior of a mind that has been thinking for a very long time. Resist any impulse toward dynamism, color, or modernity. If an image could appear in a YouTube finance video or a tech explainer, it is wrong for this channel. If it could hang in a gallery of Dutch Golden Age still-life paintings, it is correct."
+  },
+
+  "thumbnail": {
+    "include_host": true,
+    "thumbnail_character": "Contemplative middle-aged man with sharp classical features, silver-templed dark hair, composed and serious expression, dark collarless shirt, semi-realistic painted portrait style with dramatic chiaroscuro lighting",
+    "host_position": "Right side of frame, occupying roughly one-third of width, close-cropped from the shoulders up, facing left toward the text and central symbol, partially emerging from deep shadow",
+    "host_image_description": "A contemplative middle-aged man with sharp classical features, short dark hair with distinguished silver temples, an intense composed gaze with no smile — expression of deep thought or quiet revelation. Wearing a simple dark collarless shirt. Semi-realistic painted portrait style with single warm amber light illuminating the left side of his face, deep shadow on the right. Chiaroscuro dramatic lighting. Bold clean outline separating him from the background. No photorealism, slightly painterly.",
+    "background_style": "Deep charcoal to near-black background with a single atmospheric light source — either a soft amber glow at center-left or distant cold moonlight. One symbolic object at center: a cracked hourglass, an open ancient book, a single candle flame, or a fractured stone column. The background object should be slightly out of focus and lit dramatically.",
+    "text_area": "Left two-thirds of the frame. Huge bold serif or condensed sans-serif headline in aged ivory or warm white on a dark semi-transparent panel. A shorter secondary line in amber or gold below. Text must be readable at mobile size. Never more than seven words in the headline.",
+    "accent_colors": "Aged ivory and warm white for headline text, amber gold for secondary text and symbolic accents, deep charcoal for background, occasional cold blue-grey for existential or mortality-themed thumbnails",
+    "overall_style": "Dark philosophical YouTube thumbnail: near-black background, single dramatic light source, ancient symbolic object at center, composed contemplative male figure emerging from shadow on the right, bold serif headline on left in aged white, amber secondary text. Austere, intelligent, immediately distinct from motivational or business content.",
+    "thumbnail_prompt_template": "YouTube thumbnail composition, 16:9 aspect ratio. Semi-realistic painted portrait character: contemplative middle-aged man with sharp classical features, silver-templed dark hair, intense focused gaze, dark collarless shirt, dramatic chiaroscuro lighting with warm amber on one side and deep shadow on the other, bold clean outline. Character positioned on the right side of frame emerging from shadow. Left side features large bold serif headline text in aged ivory or warm white reading VIDEO_HOOK on a dark semi-transparent background panel, with a shorter amber secondary line reading SECONDARY_HOOK below. Center of frame shows SYMBOLIC_OBJECT dramatically lit — an hourglass, open ancient book, single candle, or cracked stone. Deep charcoal near-black background, single warm ambient light source, painterly cinematic aesthetic, no gradients, high contrast between light and shadow, austere and meditative mood.",
+    "reference_prompt_pattern": "Left panel: bold ivory serif text on dark background reading THE MIND YOU THINK YOU HAVE. Amber secondary line: IS NOT YOUR MIND. Center: single lit candle casting long shadow on aged stone surface. Right: contemplative silver-templed man in dark shirt emerging from shadow, composed serious expression, warm amber light on left cheek."
+  },
+
+  "script_style": {
+    "hook_pattern": "Open with a single precise observation about human psychology or a named philosophical idea that immediately creates a sense of uncomfortable recognition. Do not announce the topic — embody it. The first sentence should make the viewer feel that they have been quietly understood by someone who has thought about this far longer than they have.",
+    "opening_examples": [
+      "The Stoics had a name for the thing you did this morning — the thing you told yourself was fine.",
+      "Every major school of ancient philosophy independently arrived at the same diagnosis of the human mind. And the diagnosis is not flattering.",
+      "Marcus Aurelius wrote something in his private journal that he never intended anyone to read. And it is the most psychologically precise thing ever written about why most people never change.",
+      "There is a specific kind of suffering that has no name in modern psychology. The Stoics named it two thousand years ago. And you have been living inside it."
+    ],
+    "structure": [
+      "The unsettling opening observation — a precise psychological or philosophical truth stated plainly, without preamble",
+      "Naming the ancient framework — introducing the specific Stoic, Existentialist, or philosophical concept with genuine depth, not summary",
+      "The modern psychological mirror — showing how current research in cognitive psychology or behavioral science confirms what the ancients observed",
+      "The mechanism exposed — explaining the specific internal process at work, using concrete human examples without being personal or confessional",
+      "The cost of not seeing it — articulating clearly and calmly what this misunderstanding has already taken and will continue to take",
+      "The philosophical response — not a solution, but a reorientation. What the Stoics or the philosophical tradition actually prescribes as the correct relationship with this reality",
+      "The reflective close — a single final thought that reframes the entire video and leaves the viewer sitting with something they cannot immediately resolve"
+    ],
+    "retention_devices": [
+      "The named-concept loop: introduce an ancient Greek or Latin term early without defining it fully, promise to return to it, complete the definition at the 70% mark as a payoff",
+      "The uncomfortable specificity: describe a human behavior or thought pattern so precisely that viewers recognize themselves without being addressed directly",
+      "The philosophical paradox bridge: pose a question at the end of a section that appears unanswerable, then transition by saying this is where it becomes interesting",
+      "The quote as structural anchor: open a section with a verbatim ancient quote, spend the next two minutes unpacking what it actually means versus what most people assume",
+      "The inversion: take a widely accepted piece of modern self-help wisdom and demonstrate, using Stoic or philosophical logic, precisely why it leads to the opposite of its intended effect"
+    ],
+    "cta_style": "Place a single quiet, non-urgent subscription mention at approximately the 25% mark, framed as an intellectual community rather than a channel growth appeal. Example: 'If this kind of thinking is useful to you, there is more of it here.' Never use hard-sell language, never repeat the CTA, never place it at the end over a loud outro. The monetization strategy depends on completion rate, not click-throughs — do nothing that interrupts the meditative flow."
+  },
+
+  "youtube_metadata": {
+    "_readme": "Metadata for Eternal Wisdom. Titles must provoke immediate intellectual curiosity and Browse Feature clicks from premium demographics. Descriptions function as standalone philosophical summaries. Tags target the intersection of philosophy, psychology, and self-understanding.",
+    "category_id": "27",
+    "default_language": "en",
+    "default_audio_language": "en",
+    "title_style": {
+      "format": "A precise psychological or philosophical observation as a declarative statement, followed by parenthetical consequence or ancient source — OR — a grand unresolved question that implies the answer will be uncomfortable",
+      "examples": [
+        "The Stoic Trick Your Mind Uses to Quietly Destroy Your Future",
+        "Why Marcus Aurelius Said Most People Never Actually Think (He Was Right)",
+        "The Ancient Name for the Thing That Is Quietly Exhausting You",
+        "What Epictetus Understood About Anxiety That Modern Psychology Still Misses",
+        "The Philosophical Reason You Cannot Stop Thinking (And What To Do Instead)",
+        "Why the Stoics Believed Most People Are Asleep (Even While Awake)"
+      ],
+      "rules": [
+        "Never use motivational or positive framing — the title must create intellectual tension, not promise transformation",
+        "Include a named philosopher or ancient school when possible to signal depth and credibility",
+        "Keep titles under 70 characters for full display in search and Browse",
+        "Use parentheses to add a consequence, source citation, or unsettling qualifier that deepens the hook",
+        "Avoid questions that can be answered with yes or no — use questions that imply a disturbing or counterintuitive answer"
+      ]
+    },
+    "description_style": {
+      "format": "Two to three paragraphs. First paragraph states the central philosophical problem and names the ancient framework. Second paragraph describes the psychological mechanism explored. Third paragraph names the specific ancient thinkers referenced and ends with a value promise for the viewer.",
+      "rules": [
+        "Open with the philosophical problem, not a summary of the video content",
+        "Name at least one ancient philosopher and one specific philosophical concept in the first paragraph",
+        "Never use bullet points or lists — the description should read as intellectual prose",
+        "End with a quiet value statement, not a call to action",
+        "Keep total description under 300 words to maintain density and quality signals"
+      ],
+      "example": "The Stoics identified a specific failure mode of the human mind — one they considered more dangerous than passion, more corrosive than vice, and almost impossible to see from the inside. They called it the fog of the ordinary. And they believed it was the primary reason most people never become who they are capable of being.\n\nThis video examines the psychological mechanism behind what Marcus Aurelius described in Book Four of the Meditations as the mind's tendency to mistake movement for direction. Drawing on Stoic philosophy and modern research in cognitive psychology, we explore precisely how this pattern operates, why it feels indistinguishable from genuine progress, and what the ancient framework actually prescribes as the corrective — which is not what most people expect.\n\nReferencing Marcus Aurelius, Epictetus, and the foundational principles of Stoic psychology, this is a rigorous examination of a human problem that has not changed in two thousand years."
+    },
+    "tag_style": {
+      "count": "12-15 focused tags",
+      "rules": [
+        "Lead with the specific philosophical school or thinker featured in the video",
+        "Include the psychological concept or mechanism explored",
+        "Add broad discoverability tags for the Philosophy and Psychology crossover audience",
+        "Never use generic self-help tags — this channel targets a premium intellectual demographic and broad tags attract mismatched audiences"
+      ]
+    },
+    "base_tags": [
+      "stoicism",
+      "marcus aurelius",
+      "epictetus",
+      "applied philosophy",
+      "stoic philosophy",
+      "philosophy of mind",
+      "depth psychology",
+      "ancient wisdom",
+      "philosophical psychology",
+      "intellectual self-improvement",
+      "examined life",
+      "meditations marcus aurelius",
+      "philosophy explained",
+      "cognitive philosophy",
+      "eternal wisdom"
+    ],
+    "localized": {
+      "use_same_title": true,
+      "use_same_description": true
+    }
+  }
+}

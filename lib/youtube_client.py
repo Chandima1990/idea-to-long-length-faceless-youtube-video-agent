@@ -22,7 +22,7 @@ def _access_token() -> str:
 
 
 def upload_video(video_path: Path, title: str, description: str, tags: list,
-                 privacy: str = "private") -> str:
+                 category_id: str = "22", privacy: str = "private") -> str:
     video_path = Path(video_path)
     file_size = video_path.stat().st_size
     token = _access_token()
@@ -32,7 +32,7 @@ def upload_video(video_path: Path, title: str, description: str, tags: list,
             "title": title,
             "description": description,
             "tags": tags,
-            "categoryId": "27",  # Education
+            "categoryId": category_id,
         },
         "status": {
             "privacyStatus": privacy,

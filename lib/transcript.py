@@ -3,6 +3,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+from lib.config import BASE_DIR, FFMPEG_PATH
 from lib.deepgram_client import extract_audio, get_word_timestamps
 
 
@@ -10,13 +11,14 @@ def _find_ffmpeg() -> str:
     found = shutil.which("ffmpeg")
     if found:
         return found
-    candidates = [
-        r"C:\Users\emcc1\Downloads\Repos\remotion videos\YashAiGuy\idea-to-long-length-faceless-youtube-video-agent\remotion\node_modules\@remotion\compositor-win32-x64-msvc\ffmpeg.exe",
-        r"C:\Users\emcc1\AppData\Local\Microsoft\WinGet\Packages\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\ffmpeg-8.1.1-full_build\bin\ffmpeg.exe",
+    candidates = [c for c in [
+        str(BASE_DIR / "remotion" / "node_modules" / "@remotion" / "compositor-win32-x64-msvc" / "ffmpeg.exe"),
+        str(Path(FFMPEG_PATH) / "ffmpeg.exe") if FFMPEG_PATH else "",
+        str(Path(FFMPEG_PATH) / "ffmpeg") if FFMPEG_PATH else "",
         "/opt/homebrew/bin/ffmpeg",
         "/usr/local/bin/ffmpeg",
         "/usr/bin/ffmpeg",
-    ]
+    ] if c]
     for c in candidates:
         if Path(c).exists():
             return c

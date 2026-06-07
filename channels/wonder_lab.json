@@ -1,0 +1,171 @@
+{
+  "_readme": "This file defines the channel's style for The Wonder Lab. All scripts, scenes, thumbnails, and metadata must align with the curious, warm, and deeply satisfying science-facts niche defined here. Every video should leave the viewer thinking 'I can't believe I never knew that — I have to tell someone.'",
+
+  "reference_sample": {
+    "run_id": "TBD",
+    "title": "The Weird Reason Your Dog Exists (It Was Never About Wolves)",
+    "style_summary": "Vivid macro nature photography meets warm science visualization — rich close-up textures, warm amber and electric blue color language, intimate shallow depth-of-field compositions that make science feel alive and personal."
+  },
+
+  "channel": {
+    "name": "The Wonder Lab",
+    "niche": "Surprising, funny, and deeply satisfying science facts — everyday phenomena, animal behavior, human biology, evolution, and physics of daily life, all explained through the lens of hidden truths most people never knew existed",
+    "target_audience": "Curious 18-45 year olds who love learning but hate being lectured. People who forward science articles to their group chat, watch nature documentaries at night, and say 'did you know...' at dinner. General audience — no science background required.",
+    "tone": "Warm, genuinely excited, a little mischievous. Sounds like your smartest friend who just discovered the most fascinating thing and physically cannot stop themselves from telling you about it. Conversational and home-friendly — like chatting on a couch, not standing at a whiteboard. Light humor throughout. Never dry, never condescending, never over-the-top hype."
+  },
+
+  "host": {
+    "name": "Leo",
+    "role": "narrator and channel persona",
+    "personality": "Leo is endlessly curious, warm, and genuinely delighted by science. He gets excited in an infectious way — not in a forced 'amazing!' hype way, but in the way a person does when they've just learned something that actually blew their mind. He uses humor naturally, not as performance. He cares about the viewer understanding, not just being impressed. He makes complex science feel like discovering treasure rather than memorizing facts.",
+    "narration_style": "First-person discovery journey. Opens by stating what everyone thinks they know, then immediately reveals that it's wrong or incomplete in the most satisfying way. Layers revelations — 'okay, so that was surprising, but HERE is where it gets wild' — building to a final payoff that connects the fact to something bigger. Medium-fast pace with clear pauses after key reveals. Uses everyday analogies and comparisons to make abstract science concrete. Conversational contractions and phrasing throughout.",
+    "signature_phrases": [
+      "Okay, hold on — because this part completely broke my brain",
+      "You think you know where this is going. You don't.",
+      "Here's the thing they never teach you in school",
+      "This next part is my favorite",
+      "Scientists figured this out and — wait for it —",
+      "I need you to just sit with that for a second",
+      "The simple answer is X. The real answer is so much cooler.",
+      "And nobody talks about this",
+      "So here's what actually happened",
+      "That's wild, right? But it gets better."
+    ],
+    "physical_description": "A friendly man in his early 30s with warm brown eyes, short tousled hair, and an open expressive face that reads genuine excitement rather than performative enthusiasm. He wears casual, warm-toned shirts — amber, burnt orange, forest green, soft navy. Rendered in a slightly stylized cartoon-realistic portrait style, clean outlines, warm lighting, inviting and approachable rather than polished or corporate.",
+    "voice": "spraky",
+    "appears_in_broll": false,
+    "broll_note": "B-roll uses no host figure. All scenes are vivid macro photography and science visualization: extreme close-ups of animal eyes, fur, feathers, tree bark, water droplets, soil textures, neurons, cells, crystal structures, and natural phenomena. Human presence is shown only through hands, not faces. Every image should feel alive, tactile, and warm — like you could reach through the screen and touch it."
+  },
+
+  "visual_style": {
+    "base_style_name": "Vivid Macro Nature Photography",
+    "photographic_style": "Cinematic macro and close-up nature photography with warm color grading — shallow depth of field, rich organic textures, vibrant subject colors against softly blurred backgrounds, intimate and alive",
+    "color_palette": "Warm amber and honey gold for animal and evolution scenes. Electric cobalt blue for brain, physics, and chemistry scenes. Deep forest green and mossy olive for ecology and plant science. Rich violet and deep indigo for microscopic and cellular content. Always warm — never cold, clinical, or flat. Backgrounds are cream, deep amber bokeh, or dark forest shadow rather than white or grey.",
+    "lighting": "Warm natural light — dappled sunlight through leaves, golden hour glow, candlelit amber tones for organic subjects. Cool blue-white diffused light for microscopic and physics scenes. Never flat studio lighting. Every image has a clear directional light source that makes textures pop and gives subjects depth and warmth.",
+    "camera": "Extreme macro close-ups for texture and detail reveals. Tight compositions with shallow depth of field — one sharp element with everything else softly blurred into warm bokeh. Occasional wide intimate frames for scale and wonder. Compositions that draw the eye inward to a central discovery. No dynamic action shots — each frame should feel like a moment frozen mid-revelation.",
+    "texture": "Emphasis on organic tactile textures: animal fur, feathers, bark, soil, water surfaces, crystal edges, cell walls, pollen, insect wings. Microscopic scenes use vivid false-color or bioluminescent aesthetics. No smooth digital surfaces, no plastic, no modern manufactured materials unless the science topic specifically requires it.",
+    "mood": "Warm wonder — the feeling of leaning in close to look at something ordinary and suddenly seeing it differently. Alive, curious, slightly magical without being fantasy. Like the world is more interesting than you realized and you're just now seeing it.",
+    "scene_rules": [
+      "Use warm cream, amber bokeh, deep forest, or dark science-lab black as backgrounds. No flat white or grey backgrounds.",
+      "Every scene must contain one primary visual revelation: a close-up that exposes hidden detail, a comparison shot, a texture that surprises, or a visualization of an invisible process.",
+      "Use amber and warm gold for animal behavior, evolution, human body, and nature scenes.",
+      "Use electric blue and violet for brain science, chemistry, physics, and microscopic cellular scenes.",
+      "Use deep forest green for ecology, plant science, and environmental science scenes.",
+      "No text inside scene images. No labels, overlays, or captions within the generated image itself.",
+      "Shallow depth of field is mandatory — the subject in sharp focus, background softly blurred into color.",
+      "Alternate between extreme close-up detail shots and slightly wider intimate compositions to control pacing.",
+      "Include implied motion where possible: water mid-splash, fur in wind, leaf catching light, neuron mid-fire. The image should feel like it was caught in the perfect moment."
+    ],
+    "style_suffix_base": "Cinematic macro nature photography, warm golden hour or soft natural light, shallow depth of field with rich bokeh background, extreme close-up composition revealing organic texture and hidden detail, vibrant saturated subject colors, warm amber or forest-dark background tones, no text, no people, no modern manufactured objects, alive and tactile mood, National Geographic meets intimate science documentary aesthetic, 16:9 aspect ratio.",
+    "style_guide_note": "This channel's visual language should feel like holding a magnifying glass up to the world and discovering it's even more beautiful and strange than you thought. If an image feels sterile, clinical, or could appear in a corporate explainer video, it is wrong for this channel. If it could appear in a wildlife documentary or a science magazine cover, it is correct."
+  },
+
+  "thumbnail": {
+    "include_host": true,
+    "thumbnail_character": "Friendly man in his early 30s, short tousled hair, warm expressive face showing genuine wide-eyed surprise or excited grin, casual warm-colored shirt, slightly stylized cartoon-realistic illustration style with clean outlines",
+    "host_position": "Right side of frame, occupying roughly one-third of width, cropped from chest up, facing or leaning toward the central image and headline text, expression of genuine delight or shocked curiosity",
+    "host_image_description": "Friendly man in his early 30s with short tousled hair, warm brown eyes wide open in genuine surprise or breaking into an excited grin. Wearing a casual amber, orange, or forest-green shirt. Slightly stylized cartoon-realistic portrait style — clean bold outlines, warm illustration shading, approachable and energetic rather than polished. Not photorealistic, slightly animated in quality.",
+    "background_style": "A vivid close-up science or nature image fills most of the background — a wolf eye transforming to a dog eye, a glowing neuron, tree roots interconnected underground, a crystal structure mid-formation, a bee on a honeycomb. Background image is real-photography style but slightly color-graded and dramatic. A bold color overlay band (amber, electric blue, forest green, or deep purple depending on topic) anchors the left text panel.",
+    "text_area": "Left half to two-thirds of frame. Huge bold condensed sans-serif headline in bright white or electric yellow with a thick dark drop-shadow for readability. Maximum 5 words. A shorter secondary question or 'fact hook' line below in contrasting color. Both must be readable at mobile size.",
+    "accent_colors": "Bright electric yellow for headline text, warm white for secondary text, deep color panels (amber, cobalt blue, forest green, deep purple) matched to the topic territory, with vivid nature photography as the primary background element",
+    "overall_style": "Vivid curiosity-driven YouTube science thumbnail: dramatic close-up nature or science image as backdrop, bold color panel on left with huge white or yellow headline, shorter secondary fact hook below, friendly surprised/excited man on the right with clean bold outline, warm and vibrant color palette, high contrast, immediately clear what the video is about at a glance.",
+    "thumbnail_prompt_template": "YouTube thumbnail composition, 16:9 aspect ratio. Cartoon-realistic character: friendly man in his early 30s, short tousled hair, bold clean outlines, warm illustration style. Character on the right side of frame showing wide-eyed surprise or excited open-mouth grin, wearing a casual amber or forest-green shirt. Left two-thirds of frame shows a large bold white or electric yellow headline reading VIDEO_HOOK in huge condensed bold font, with a shorter secondary line reading SECONDARY_HOOK below in contrasting color, both on a dark semi-transparent color panel. Background shows SCIENCE_VISUAL — a dramatic close-up nature or science photography image related to the topic (animal eye, glowing neuron, crystal structure, bee on honeycomb, tree roots, etc.) with vivid warm or electric color grading. Bold clean outlines on the character, high contrast between text and background, warm vivid color palette, inviting and curious energy.",
+    "reference_prompt_pattern": "Background: extreme close-up of a wolf eye on the left dissolving into a dog eye on the right, golden amber and warm brown tones. Left panel: huge white bold text reading WOLVES DIDN'T BECOME DOGS. Yellow secondary line: The real story is stranger. Right: friendly surprised man in amber shirt with wide eyes and open mouth, clean cartoon-realistic style."
+  },
+
+  "script_style": {
+    "hook_pattern": "Open by stating the version of the story everyone thinks they know — clearly and confidently — then immediately and specifically reveal why that version is wrong, incomplete, or hiding the far more interesting truth. The hook should make the viewer lean forward, not just nod along.",
+    "opening_examples": [
+      "You've heard that wolves became dogs because early humans fed them scraps around campfires. That story is everywhere. It's also mostly wrong — and the actual truth is so much stranger it'll change how you see your dog every time you look at them.",
+      "Your heart beats about 100,000 times a day. You already knew that. What you probably didn't know is that every single one of those beats is triggered by a tiny electrical signal — and the origin of that signal is one of the most bizarre facts in all of biology.",
+      "Trees don't compete for sunlight. They share it. And the reason why — the actual mechanism — is something scientists only discovered in the 1990s, and it completely rewrote what we thought we knew about forests.",
+      "There's a reason music gives you chills. Scientists found it. And when you understand the mechanism, you'll never hear your favorite song the same way again."
+    ],
+    "structure": [
+      "The known version — state confidently what most people believe (2-3 sentences)",
+      "The reveal — immediately break the known version with the surprising truth ('Actually...' / 'Here's what actually happened...')",
+      "The mechanism — explain the hidden science clearly, using an everyday analogy",
+      "The 'wait, it gets better' layer — one more surprising fact that deepens the revelation",
+      "The scientific detail — a specific finding, study, number, or researcher discovery that makes it feel real and credible",
+      "The 'bigger picture' connection — how this connects to something the viewer can feel or see in their daily life",
+      "The satisfying close — a final reframe that leaves the viewer with a new lens on something ordinary"
+    ],
+    "retention_devices": [
+      "The known-version subversion: confidently state what everyone believes, then instantly demolish it",
+      "Layered revelations: 'okay that was surprising, but WAIT until you hear this next part'",
+      "The everyday anchor: tie abstract science to something the viewer does, sees, or feels every single day",
+      "The specific number or date: one precise, surprising fact that makes the science feel undeniably real ('scientists tracked this in 1997 and found...')",
+      "The teased payoff: name the final satisfying conclusion early ('by the end of this, you'll understand why your dog actually looks at you the way they do') and deliver it at the end",
+      "Light humor: one or two moments where the science is so absurd that laughing at it is the appropriate response"
+    ],
+    "cta_style": "Place a single warm, conversational subscription mention around the 20-25% mark, framed as joining a group of curious people rather than a channel growth appeal. Example: 'If this kind of thing is your thing, stick around — there's a lot more where this came from.' Keep it to two sentences, never hard-sell, never repeat it, never place it over a loud transition. The channel's retention depends on the viewer feeling rewarded for watching, not prompted to act."
+  },
+
+  "youtube_metadata": {
+    "_readme": "Metadata for The Wonder Lab. Titles should spark immediate curiosity by subverting a known 'fact' or posing a question with an obviously surprising answer. Descriptions should feel like the first paragraph of a great magazine article — not a contents list. Tags target the intersection of science, nature, and curious general audiences.",
+    "category_id": "27",
+    "default_language": "en",
+    "default_audio_language": "en",
+    "title_style": {
+      "format": "Subvert a known belief OR pose a question with an obviously surprising answer — followed by a parenthetical that deepens the curiosity or reveals the stakes",
+      "examples": [
+        "The Weird Reason Your Dog Exists (It Was Never About Wolves)",
+        "Why Music Gives You Chills (Scientists Finally Figured It Out)",
+        "Trees Are Actually Talking Right Now (And We Just Started Listening)",
+        "The Reason You Yawn Has Nothing to Do With Being Tired",
+        "What Happens to Your Body in Complete Silence (It's Unsettling)",
+        "Octopuses Are Color Blind — So How Do They Change Color? (The Answer Is Wild)",
+        "Your Memory Is Not a Recording (And That Changes Everything)",
+        "The Hidden Reason Cats Always Land on Their Feet (It Defies Physics)"
+      ],
+      "rules": [
+        "Lead with a surprising truth, a subverted belief, or a question that implies the answer will be shocking",
+        "Include the specific science topic keyword for searchability",
+        "Use parentheses to add a consequence, emotional qualifier, or deepened hook — never a spoiler",
+        "Keep titles under 70 characters for full display in search and Browse",
+        "Never use generic titles like 'Amazing Science Facts' or '10 Things You Didn't Know' — be specific"
+      ]
+    },
+    "description_style": {
+      "format": "Two paragraphs. First paragraph opens with the surprising truth or question, states what most people believe, and promises to reveal what's really happening. Second paragraph describes the specific science or natural mechanism explored and names the 'wow moment' the viewer will leave with — without spoiling it.",
+      "rules": [
+        "Open like a great magazine article — with the most interesting sentence you can write, not a summary",
+        "Name the specific phenomenon, animal, mechanism, or discovery being explored",
+        "Never use bullet points or lists — write it as engaging prose",
+        "End with a warm value statement that makes the viewer feel like watching is worth their time",
+        "Keep total description under 250 words to maintain density"
+      ],
+      "example": "Wolves became dogs. Everyone knows the story. Early humans fed wolf pups scraps, they stuck around, and over generations we ended up with golden retrievers. Except that's almost entirely wrong — and the actual mechanism behind dog domestication is so strange and counterintuitive that it rewrites everything we think we understand about how humans and animals change each other.\n\nThis video traces the real science of how dogs came to exist — from the unexpected spark that started the process to the hidden biological changes that happened without anyone planning them, including one discovery that explains why your dog looks at you the way they do. It's one of the most satisfying stories in all of evolutionary biology, and by the end of it, you'll see your dog completely differently."
+    },
+    "tag_style": {
+      "count": "12-15 focused tags",
+      "rules": [
+        "Lead with the specific topic keyword (e.g. 'dog evolution', 'music chills', 'tree communication')",
+        "Add mechanism or science-type keywords (e.g. 'evolutionary biology', 'neuroscience explained', 'animal behavior')",
+        "Include broad curiosity/discovery audience tags: science facts, did you know, interesting facts, cool science",
+        "Avoid pure clickbait tags — this channel targets engaged curious viewers, not passive scrollers"
+      ]
+    },
+    "base_tags": [
+      "science facts",
+      "did you know",
+      "interesting facts",
+      "cool science",
+      "science explained",
+      "nature facts",
+      "animal behavior",
+      "evolutionary biology",
+      "human biology",
+      "neuroscience",
+      "fun science",
+      "science videos",
+      "amazing facts",
+      "biology explained",
+      "the wonder lab"
+    ],
+    "localized": {
+      "use_same_title": true,
+      "use_same_description": true
+    }
+  }
+}

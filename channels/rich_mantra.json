@@ -1,0 +1,163 @@
+{
+  "_readme": "This file defines the channel's style. It is now based on the reference output: outputs/2026-05-07_093140_what-nobody-tells-you-about-your-401k. All future scripts, scene prompts, thumbnails, metadata, and article assets should follow this style unless the user explicitly overrides it.",
+
+  "reference_sample": {
+    "run_id": "2026-05-07_093140_what-nobody-tells-you-about-your-401k",
+    "title": "What Nobody Tells You About Your 401k (They Are Quietly Taking Your Money)",
+    "style_summary": "Urgent personal-finance explainer with flat 2D vector infographic scenes, white backgrounds, bold outlines, clear red/green/blue financial icons, and high-contrast cartoon thumbnails."
+  },
+
+  "channel": {
+    "name": "Rich Mantra",
+    "niche": "personal finance, investing, retirement, ETFs, hidden money leaks, and financial freedom",
+    "target_audience": "25-45 year olds who want practical investing and money guidance, especially people who suspect they are missing hidden rules, fees, risks, or opportunities",
+    "tone": "direct, urgent, useful, slightly angry at unfair money systems, but still clear and accessible. Sounds like a smart friend showing the viewer where money is quietly leaking."
+  },
+
+  "host": {
+    "name": "Josh",
+    "role": "narrator and channel persona",
+    "personality": "Relatable, investigative, protective of ordinary people, frustrated by hidden fees and confusing systems, practical rather than flashy. He explains money traps in plain language and turns vague finance anxiety into concrete next steps.",
+    "narration_style": "First-person conversational explainer. Opens with a strong emotional hook or uncomfortable truth, uses big concrete numbers, explains the mechanism, then gives a simple action step. Short punchy sentences mixed with clear explanatory paragraphs.",
+    "signature_phrases": [
+      "Here is something that makes me genuinely angry",
+      "Here is what nobody tells you",
+      "Here is where it gets interesting",
+      "Most people never notice this",
+      "I want you to hear this number clearly",
+      "That is not a rounding error",
+      "Log in tonight"
+    ],
+    "physical_description": "32-year-old man with short dark brown hair, short dark beard, average build, light skin tone. Wearing a light sky-blue casual short-sleeve button-down shirt and dark navy blue pants. No glasses. Flat vector cartoon illustration style, clean bold black outlines, simple flat color fills, no realistic shading or gradients.",
+    "broll_character_prompt": "Josh: 32-year-old man, short dark brown hair, short dark beard, average build, light skin, light sky-blue casual short-sleeve shirt, dark navy pants, no glasses. Flat vector cartoon illustration style, clean bold black outlines, simple flat color fills, no gradients, no shading.",
+    "voice": "josh",
+    "appears_in_broll": true,
+    "broll_inclusion_rules": [
+      "Include Josh when narration is direct-address (uses 'you', 'I', 'we') or delivers an emotional hook or reveal.",
+      "Include Josh when the scene is simple enough that a human presenter adds clarity without crowding the layout.",
+      "Include Josh when a pose meaningfully matches the narration: pointing up for an insight, gesturing at a chart for a data reveal, arms crossed for a frustrated observation, thumbs up for a positive action step.",
+      "Skip Josh when the scene contains multiple financial elements that fill the frame (charts, numbers, tables, comparison boards).",
+      "Skip Josh when the scene is abstract, symbolic, or concept-driven (e.g., a compound interest diagram, a fee flow chart).",
+      "Aim for Josh to appear in roughly 25-35% of total scenes — present enough to build character familiarity, not so often that infographic scenes feel cluttered."
+    ],
+    "broll_note": "Josh appears selectively in B-roll scenes. When included, use broll_character_prompt verbatim as the character description. Match pose and expression to scene emotion: pointing up for insights, concerned or gesturing for warnings, neutral presenting for explanations, thumbs up for positive outcomes. Reference art: channels/channel_art/rich_mantra_character_josh.png"
+  },
+
+  "visual_style": {
+    "base_style_name": "Flat 2D Vector Infographic",
+    "photographic_style": "flat 2D vector illustration, infographic style, bold clean outlines, solid color fills",
+    "color_palette": "white backgrounds with clean blues, whites, grays, and bold red and green accents for contrast. Use yellow sparingly for warnings or emphasis.",
+    "lighting": "flat, no cinematic lighting, no realistic shadows, no gradients, uniform fills throughout",
+    "camera": "centered frontal compositions, clean infographic layouts, document close-ups, chart panels, comparison boards, magnifying glasses, calculators, arrows, and financial menus. Avoid deep perspective and cinematic camera language.",
+    "texture": "smooth vector surfaces, crisp geometric edges, minimal texture, no film grain in source images",
+    "mood": "clear, informative, bold, modern, accessible, urgent when exposing money leaks",
+    "scene_rules": [
+      "Use white or very light backgrounds for main video scene images.",
+      "Prefer one main idea per scene with large readable icons.",
+      "Use red for danger, fees, losses, warnings, or hidden costs.",
+      "Use green for growth, savings, investments, compounding, or money preserved.",
+      "Use blue for neutral finance systems, documents, dashboards, calculators, and explanatory elements.",
+      "Use bold black or dark outlines on every important object.",
+      "No photorealistic people, no cinematic b-roll, no decorative gradients, no soft shadows.",
+      "Text inside scene images is allowed only when it is central, large, and useful, such as HIDDEN FEE, FEES, EXPENSE RATIO, or a clear dollar amount."
+    ],
+    "style_suffix_base": "Flat 2D vector illustration, infographic style, bold clean outlines, solid color fills, no gradients, no shadows, no photorealism, white background, modern minimal design, geometric shapes, clean finance icons, red and green accents, 16:9 aspect ratio.",
+    "style_guide_note": "This channel's main video visuals should look like educational finance infographics, not stock footage or realistic documentary images."
+  },
+
+  "thumbnail": {
+    "include_host": true,
+    "thumbnail_character": "32-year-old man with short dark brown hair, short dark beard, average build, light skin, light sky-blue casual shirt and dark navy pants. Flat vector cartoon illustration style, bold black outlines, expressive shocked or worried face. No glasses.",
+    "host_position": "right side of frame, large, cropped close to the edge, facing or gesturing toward the headline and central chart/problem",
+    "host_image_description": "32-year-old man with short dark brown hair and short dark beard, average build, light skin tone, light sky-blue casual short-sleeve shirt, dark navy pants, no glasses. Exaggerated shocked open-mouth expression or worried expression, hands raised or pointing. Flat vector cartoon illustration style, bold black outlines, simple flat color fills, no photorealism.",
+    "background_style": "dark charcoal background with dark red headline blocks, bright yellow accent bars or corner shapes, and occasional thin red/yellow motion lines",
+    "text_area": "left side or left two-thirds of frame, huge bold white uppercase headline on dark red block, with a shorter yellow secondary line below. Text should be readable at mobile thumbnail size.",
+    "accent_colors": "dark red blocks, bright yellow accents, green chart/money elements, red arrows/warnings, blue character shirt",
+    "overall_style": "high-contrast YouTube finance thumbnail: dark charcoal background, red text panel, huge white headline, yellow secondary text, green finance chart or money visual, red danger arrow or warning, shocked cartoon man on the right. Bold, simple, immediately understandable.",
+    "thumbnail_prompt_template": "YouTube thumbnail composition, 16:9 aspect ratio. Cartoon animated character: 32-year-old man with short dark brown hair and short dark beard, average build, light skin, light sky-blue casual short-sleeve shirt, dark navy pants, no glasses. Bold black outlines, flat vector cartoon illustration style. Character on the right side showing a shocked open-mouth expression or worried reaction. Left side has large bold white text on dark red background reading VIDEO_HOOK, with a smaller yellow line below reading SECONDARY_HOOK. Center has SIMPLE_FINANCE_VISUAL with green money/chart elements being attacked or exposed by red warning arrows, fees, bills, or danger icons. Dark charcoal background, high contrast yellow and red accents, bold black outlines on all elements, flat 2D cartoon illustration style, no gradients, no photorealism, no shadows, bright saturated colors.",
+    "reference_prompt_pattern": "Left side red block: NOBODY TELLS YOU THIS. Bottom yellow/white line: YOUR 401k. Center: green bar chart being eaten by red FEES arrow. Right: shocked dark-haired bearded man in blue shirt with hands raised."
+  },
+
+  "script_style": {
+    "hook_pattern": "Start with a personal frustration or uncomfortable truth, then immediately attach a big concrete loss number or hidden mechanism.",
+    "opening_examples": [
+      "Here is something that makes me genuinely angry every time I think about it.",
+      "The average worker loses more than two hundred thousand dollars to one line most people never read."
+    ],
+    "structure": [
+      "emotional hook",
+      "viewer identity and why this matters",
+      "hidden mechanism explained simply",
+      "big number math that makes the stakes real",
+      "why most people miss it",
+      "simple action step",
+      "reflective close that reframes the money as the viewer's future"
+    ],
+    "retention_devices": [
+      "hidden fee or hidden rule reveal",
+      "large dollar amount payoff",
+      "most people never notice this framing",
+      "simple 15-minute action step",
+      "injustice framing: ordinary people quietly lose money to systems that look helpful"
+    ],
+    "cta_style": "If used, place a short subscribe CTA early after the hook, framed around stopping money leaks or learning the rules most people miss. Do not end with a long hard-sell CTA."
+  },
+
+  "youtube_metadata": {
+    "_readme": "Use metadata patterns from the 401k reference output. Keep titles searchable but emotionally sharp. Descriptions should summarize the hidden problem, the mechanism, the financial stakes, and the action step.",
+    "category_id": "27",
+    "default_language": "en",
+    "default_audio_language": "en",
+    "title_style": {
+      "format": "What Nobody Tells You About [Topic] ([Consequence or Curiosity Hook])",
+      "examples": [
+        "What Nobody Tells You About Your 401k (They Are Quietly Taking Your Money)",
+        "What Nobody Tells You About Health Insurance (It Protects Your Portfolio)",
+        "The ETF Mistake That Quietly Costs Beginners Thousands"
+      ],
+      "rules": [
+        "Lead with curiosity, hidden information, or a costly mistake.",
+        "Include the core searchable finance keyword.",
+        "Use parentheses for the consequence, dollar amount, or emotional hook.",
+        "Avoid vague motivational titles."
+      ]
+    },
+    "description_style": {
+      "format": "One concise paragraph, 2-4 sentences.",
+      "rules": [
+        "Open with the main hidden risk or benefit.",
+        "Include a concrete number, mechanism, or action step when available.",
+        "Explain why the viewer should care now.",
+        "End with a clear value promise such as essential watching, simple switch, or practical breakdown."
+      ],
+      "example": "Your 401k might be costing you over 200,000 dollars in hidden fees that most employers never explain. This video breaks down exactly how revenue sharing and expense ratios silently extract money from your retirement account year after year, and the simple 15-minute switch that can save hundreds of thousands of dollars over your career. If you have a 401k, this is essential watching."
+    },
+    "tag_style": {
+      "count": "10-15 focused tags",
+      "rules": [
+        "Start with the specific topic keyword.",
+        "Add mechanism keywords such as expense ratios, hidden fees, index funds, insurance, emergency fund, or ETF investing.",
+        "Include broad channel keywords: personal finance, investing, financial independence, wealth building."
+      ]
+    },
+    "base_tags": [
+      "personal finance",
+      "investing",
+      "financial independence",
+      "wealth building",
+      "retirement planning",
+      "index funds",
+      "ETFs",
+      "hidden fees",
+      "money tips",
+      "financial freedom",
+      "retirement savings",
+      "passive investing",
+      "stock market"
+    ],
+    "localized": {
+      "use_same_title": true,
+      "use_same_description": true
+    }
+  }
+}

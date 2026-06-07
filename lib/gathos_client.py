@@ -11,6 +11,7 @@ from lib.config import (
     GATHOS_IMAGE_HEIGHT,
     GATHOS_IMAGE_WIDTH,
     GATHOS_MAX_RETRIES,
+    GATHOS_IMAGE_MAX_RETRIES,
     GATHOS_POLL_INTERVAL,
     GATHOS_TIMEOUT,
     GATHOS_TTS_POLL_INTERVAL,
@@ -26,9 +27,8 @@ def _tts_headers():
 
 
 def submit_image_job(prompt: str, width: int = GATHOS_IMAGE_WIDTH, height: int = GATHOS_IMAGE_HEIGHT) -> str:
-    max_retries = 10
     last_exc = None
-    for attempt in range(max_retries):
+    for attempt in range(GATHOS_IMAGE_MAX_RETRIES):
         try:
             resp = requests.post(
                 f"{GATHOS_BASE_URL}/image-generation",
@@ -42,8 +42,8 @@ def submit_image_job(prompt: str, width: int = GATHOS_IMAGE_WIDTH, height: int =
             last_exc = e
             status = getattr(getattr(e, "response", None), "status_code", None)
             wait = 90 * (attempt + 1) if status == 429 else 15 * (attempt + 1)
-            if attempt < max_retries - 1:
-                print(f"    Retry {attempt+1}/{max_retries} after error: {e} (waiting {wait}s)")
+            if attempt < GATHOS_IMAGE_MAX_RETRIES - 1:
+                print(f"    Retry {attempt+1}/{GATHOS_IMAGE_MAX_RETRIES} after error: {e} (waiting {wait}s)")
                 time.sleep(wait)
     raise last_exc
 
@@ -87,24 +87,15 @@ def generate_images_batch(prompts: list[dict], output_dir: Path) -> list[Path]:
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    output_dir = Path(output_dir)
-    output_dir.mkdir(parents=True, exist_ok=True)
-
+    # Process one at a time to stay within the 2-concurrent API limit
     results = []
-    for p in prompts:
+    total = len(prompts)
+    for i, p in enumerate(prompts):
         out = output_dir / p["filename"]
-        if out.exists() and out.stat().st_size > 0:
-            print(f"  Skipping (exists): {out.name}")
-            results.append(out)
-            continue
         w = p.get("width", GATHOS_IMAGE_WIDTH)
         h = p.get("height", GATHOS_IMAGE_HEIGHT)
-        job_id = submit_image_job(p["prompt"], w, h)
-        print(f"  Submitted: {out.name} -> {job_id}")
-        time.sleep(2)
-        b64 = poll_image_job(job_id)
-        out.write_bytes(base64.b64decode(b64))
-        print(f"  Saved: {out.name}")
+        print(f"  [{i+1}/{total}] Generating: {out.name}")
+        generate_image(p["prompt"], out, w, h)
         results.append(out)
     return results
 
@@ -116,13 +107,13 @@ def submit_tts_job(text: str, voice: str) -> str:
                 f"{GATHOS_BASE_URL}/tts",
                 headers=_tts_headers(),
                 json={"text": text, "voice": voice},
-                timeout=30,
+                timeout=120,
             )
             resp.raise_for_status()
             return resp.json()["job_id"]
-        except (requests.HTTPError, requests.ConnectionError) as e:
+        except (requests.HTTPError, requests.ConnectionError, requests.Timeout) as e:
             if attempt < GATHOS_MAX_RETRIES - 1:
-                wait = 5 * (attempt + 1)
+                wait = 15 * (attempt + 1)
                 print(f"    Retry {attempt+1}/{GATHOS_MAX_RETRIES} after error: {e} (waiting {wait}s)")
                 time.sleep(wait)
             else:

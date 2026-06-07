@@ -3,9 +3,14 @@ import subprocess
 import sys
 from pathlib import Path
 
-from lib.config import OUTPUTS_DIR, YOUTUBE_CLIENT_ID
+from lib.config import (
+    OUTPUTS_DIR, YOUTUBE_CLIENT_ID, CHANNEL_STYLE_PATH,
+    GATHOS_IMAGE_WIDTH, GATHOS_IMAGE_HEIGHT,
+    GATHOS_SHORTS_IMAGE_WIDTH, GATHOS_SHORTS_IMAGE_HEIGHT,
+)
 from lib.state import create_run, load_run, update_stage
-from lib.gathos_client import generate_tts, generate_image, generate_images_batch
+from lib.gathos_client import generate_tts
+from lib.image_provider import generate_image, generate_images_batch, active_provider
 from lib.deepgram_client import save_word_timestamps
 from lib.transcript import download_youtube, transcribe_video
 
@@ -74,6 +79,16 @@ def stage_timestamps(run_id: str):
     audio_path = output_dir / "narration.mp3"
     words_path = output_dir / "words.json"
 
+    channel_style = json.loads(CHANNEL_STYLE_PATH.read_text(encoding='utf-8'))
+    captions_enabled = channel_style.get("channel", {}).get("captions_enabled", True)
+
+    if not captions_enabled:
+        print("[TIMESTAMPS] Captions disabled for this channel — skipping Deepgram.")
+        words_path.write_text("[]", encoding='utf-8')
+        update_stage(run_id, "timestamps", "skipped", str(words_path))
+        _rescale_scenes_to_audio(run_id, output_dir)
+        return
+
     if not audio_path.exists():
         print("ERROR: narration.mp3 not found. Run TTS stage first.")
         sys.exit(1)
@@ -97,19 +112,51 @@ def stage_images(run_id: str):
         print("ERROR: scenes.json not found. Run scenes stage first.")
         sys.exit(1)
 
+    is_shorts = run.get("shorts", False)
+    img_width = GATHOS_SHORTS_IMAGE_WIDTH if is_shorts else GATHOS_IMAGE_WIDTH
+    img_height = GATHOS_SHORTS_IMAGE_HEIGHT if is_shorts else GATHOS_IMAGE_HEIGHT
+
     scenes = json.loads(scenes_path.read_text(encoding='utf-8'))
     prompts = []
     for i, scene in enumerate(scenes["scenes"]):
         prompts.append({
             "prompt": scene["image_prompt"],
             "filename": f"scene_{i+1:03d}.png",
+            "width": img_width,
+            "height": img_height,
         })
 
-    print(f"[IMAGES] Generating {len(prompts)} B-roll images...")
+    print(f"[IMAGES] Provider: {active_provider()} | Generating {len(prompts)} B-roll images ({img_width}x{img_height})...")
     update_stage(run_id, "images", "in_progress")
     generate_images_batch(prompts, images_dir)
     update_stage(run_id, "images", "complete", str(images_dir))
+    update_stage(run_id, "image_review", "pending_review", str(images_dir))
     print(f"[IMAGES] Done: {images_dir}")
+    print("[IMAGE REVIEW] Guardrail active. Review the generated B-roll images before rendering.")
+    print(f"[IMAGE REVIEW] Images directory: {images_dir}")
+    print(f"[IMAGE REVIEW] To approve rendering, run: python -m lib.pipeline --stage approve_images --run-id {run_id}")
+
+
+def stage_approve_images(run_id: str):
+    run = load_run(run_id)
+    output_dir = Path(run["output_dir"])
+    images_dir = output_dir / "images"
+
+    if not images_dir.exists():
+        print("ERROR: images directory not found. Run images stage first.")
+        sys.exit(1)
+
+    scenes_path = output_dir / "scenes.json"
+    if scenes_path.exists():
+        scenes = json.loads(scenes_path.read_text(encoding='utf-8')).get("scenes", [])
+        expected = len(scenes)
+        existing = len(list(images_dir.glob("scene_*.png")))
+        if existing < expected:
+            print(f"ERROR: image review cannot be approved yet. Found {existing}/{expected} scene images.")
+            sys.exit(1)
+
+    update_stage(run_id, "image_review", "approved", str(images_dir))
+    print(f"[IMAGE REVIEW] Approved for render: {images_dir}")
 
 
 def stage_render(run_id: str):
@@ -117,25 +164,30 @@ def stage_render(run_id: str):
     output_dir = Path(run["output_dir"])
     import subprocess
 
-    props = {
-        "outputDir": str(output_dir),
-        "filmPreset": run["film_preset"],
-    }
-    props_json = json.dumps(props)
-
+    is_shorts = run.get("shorts", False)
+    composition = "ShortsVideo" if is_shorts else "ViralBrollVideo"
     remotion_dir = Path(__file__).parent.parent / "remotion"
     final_path = output_dir / "final.mp4"
 
+    image_review = run.get("stages", {}).get("image_review", {})
+    if image_review.get("status") != "approved":
+        images_dir = output_dir / "images"
+        print("ERROR: image review approval required before rendering.")
+        print(f"Review the generated B-roll images here: {images_dir}")
+        print(f"After user approval, run: python -m lib.pipeline --stage approve_images --run-id {run_id}")
+        sys.exit(1)
+
     _rescale_scenes_to_audio(run_id, output_dir)
 
-    print("[RENDER] Rendering video with Remotion...")
+    print(f"[RENDER] Rendering {composition} with Remotion...")
     update_stage(run_id, "render", "in_progress")
     subprocess.run(
         [
-            "npx", "remotion", "render",
-            "ViralBrollVideo",
+            "node", "render.mjs",
+            str(output_dir),
+            run["film_preset"],
             str(final_path),
-            "--props", props_json,
+            composition,
         ],
         cwd=str(remotion_dir),
         check=True,
@@ -164,6 +216,11 @@ def stage_thumbnail(run_id: str):
         style_suffix = json.loads(style_path.read_text(encoding='utf-8')).get("style_suffix", "")
 
     prompt = f"{raw_prompt} {style_suffix}".strip()
+
+    if active_provider() == "openai":
+        print("[THUMBNAIL] Skipped — IMAGE_PROVIDER=openai. Generate the thumbnail manually in ChatGPT.")
+        update_stage(run_id, "thumbnail", "skipped")
+        return
 
     print("[THUMBNAIL] Generating thumbnail image...")
     update_stage(run_id, "thumbnail", "in_progress")
@@ -228,10 +285,13 @@ def stage_upload(run_id: str):
     description = scenes_data.get("description", "")
     tags = scenes_data.get("tags", [])
 
+    channel_style = json.loads(CHANNEL_STYLE_PATH.read_text(encoding='utf-8'))
+    category_id = channel_style.get("youtube_metadata", {}).get("category_id", "22")
+
     print(f"[UPLOAD] Uploading to YouTube as private draft...")
     print(f"  Title: {title}")
     update_stage(run_id, "upload", "in_progress")
-    video_id = upload_video(final_path, title, description, tags, privacy="private")
+    video_id = upload_video(final_path, title, description, tags, category_id=category_id, privacy="private")
     url = f"https://youtu.be/{video_id}"
     update_stage(run_id, "upload", "complete", url)
     print(f"[UPLOAD] Done: {url}")
@@ -288,6 +348,7 @@ STAGE_MAP = {
     "tts": stage_tts,
     "timestamps": stage_timestamps,
     "images": stage_images,
+    "approve_images": stage_approve_images,
     "render": stage_render,
     "thumbnail": stage_thumbnail,
     "metadata": stage_metadata,

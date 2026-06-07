@@ -6,13 +6,15 @@ from pathlib import Path
 
 import requests
 
-from lib.config import DEEPGRAM_API_KEY, DEEPGRAM_MODEL
+from lib.config import DEEPGRAM_API_KEY, DEEPGRAM_BASE_URL, DEEPGRAM_MODEL, BASE_DIR, FFMPEG_PATH
 
-_FFMPEG_CANDIDATE_DIRS = [
-    r"C:\Users\emcc1\Downloads\Repos\remotion videos\YashAiGuy\idea-to-long-length-faceless-youtube-video-agent\remotion\node_modules\@remotion\compositor-win32-x64-msvc",
-    r"C:\Users\emcc1\AppData\Local\Microsoft\WinGet\Packages\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\ffmpeg-8.1.1-full_build\bin",
+_FFMPEG_CANDIDATE_DIRS = [d for d in [
+    str(BASE_DIR / "remotion" / "node_modules" / "@remotion" / "compositor-win32-x64-msvc"),
+    FFMPEG_PATH,
     "/opt/homebrew/bin",
-]
+    "/usr/local/bin",
+    "/usr/bin",
+] if d]
 
 
 def _find_exe(name: str) -> str:
@@ -64,7 +66,7 @@ def get_word_timestamps(audio_path: Path) -> list[dict]:
         audio_data = f.read()
 
     resp = requests.post(
-        "https://api.deepgram.com/v1/listen",
+        f"{DEEPGRAM_BASE_URL}/listen",
         headers={
             "Authorization": f"Token {DEEPGRAM_API_KEY}",
             "Content-Type": "audio/wav",

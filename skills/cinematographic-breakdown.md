@@ -1,14 +1,20 @@
 # Cinematographic Breakdown
 
 ## Input
-- `channel_style.json` — **Read this first.** It defines the channel's base visual style, host character (physical description), and thumbnail rules. All three parts of this breakdown must align with it.
+- `channels/<CHANNEL>.json` — **Read this first** (path from `CHANNEL_STYLE_PATH` in `lib/config.py`; default `channels/rich_mantra.json`). It defines the channel's base visual style, host character (physical description), and thumbnail rules. All three parts of this breakdown must align with it.
 - `outputs/<run_id>/script.md` — the narration script
 - `duration_minutes` — target length
+
+## Provider check (before writing image prompts)
+Check `IMAGE_PROVIDER` in `lib/config.py` / `.env`. If it is `comfyui` (local
+Flux), **also read [`skills/flux-image-prompting.md`](flux-image-prompting.md)**
+and apply its number/table/layout constraints to every `image_prompt` — layered
+on top of the channel style, not replacing it. For `gathos`/`gemini`, skip it.
 
 ## Process
 
 ### Part 1: STYLE CARD
-Read `channel_style.json` (`visual_style` section) and the script, then derive a unified visual style.
+Read the active channel style file (`visual_style` section) and the script, then derive a unified visual style.
 
 **Rules for style derivation:**
 - Start from `channel_style.visual_style.style_suffix_base` — this is the brand DNA that MUST appear in every video's style_suffix
@@ -35,11 +41,18 @@ The `style_suffix` is the KEY to consistency. It gets appended word-for-word to 
 > "cinematic documentary photography, photorealistic, earth tones, natural lighting, shot on RED V-Raptor, 8K detail"
 
 ### Part 2: CHARACTERS
-Read `channel_style.json` (`host` section) first.
+Read the active channel style file (`host` section) first.
 
 **Always include the channel host** as the first character entry, using `channel_style.host.physical_description` verbatim as their `description`. The host's `id` is their name lowercased (e.g., `"josh"`). Scan the script for scenes where the narration uses first-person action ("I tried", "I asked", "I found", "I looked") or explicitly calls out the host — those are the `appears_in_scenes` values.
 
 If `channel_style.host.appears_in_broll` is `false`, set `appears_in_scenes` to an empty array (host is voice-only).
+
+If `channel_style.host.appears_in_broll` is `true`, scan the entire script first and select scene numbers where Josh should appear, guided by `host.broll_inclusion_rules`. Pick scenes where:
+- Narration is direct-address ("you", "I", "we") or delivers an emotional hook or reveal
+- The scene is visually simple enough for Josh to appear without crowding financial elements
+- A Josh pose would meaningfully match the narration (pointing for insights, gesturing at a chart, reacting to a bad number, thumbs up for a positive step)
+
+Skip scenes that are chart-heavy, data-heavy, or abstract/concept-driven. Aim for 25-35% of total scenes. Record the selected scene numbers in `appears_in_scenes`.
 
 Then parse the script for any OTHER recurring people/characters and add them:
 
@@ -70,6 +83,11 @@ Split the script into visual segments. Each segment = one B-roll image.
 **Segment duration:** 7-15 seconds (default 10s)
 **Formula:** `duration = max(7, min(15, round(word_count / 2.5)))`
 **Split at sentence boundaries only** — never mid-sentence.
+
+**SCENE COUNT MUST BE DIVISIBLE BY 4** (OpenAI collage pipeline constraint):
+The total number of scenes must be a multiple of 4 (e.g., 24, 28, 32, 36).
+If your natural split produces a non-multiple, merge the last 1-3 short scenes into adjacent scenes OR split a long scene into two to reach the next multiple of 4.
+Never leave a remainder — individual scene generation calls to OpenAI cost more and produce inconsistent style.
 
 For EACH segment, generate:
 
@@ -103,6 +121,12 @@ The image prompt is a CINEMATOGRAPHER'S SHOT DESCRIPTION, not a topic summary.
 - Use abstract concepts ("the feeling of loss")
 - Include text, watermarks, or UI elements in the prompt
 - Reuse the same composition for consecutive scenes
+
+**WHEN JOSH APPEARS IN A SCENE** (`characters_in_scene` includes `"josh"`):
+- Use `channel_style.host.broll_character_prompt` verbatim as the character description — do not paraphrase or abbreviate it
+- Match Josh's pose/expression to the scene emotion: pointing up for an insight, gesturing at a chart for a data reveal, arms crossed or concerned face for a warning, thumbs up for a positive outcome, neutral presenting for explanations
+- Keep infographic elements (charts, icons, arrows) as the visual anchor — Josh complements them, not the reverse
+- Place Josh naturally: left or center for direct-address/presenter poses, right side for pointing/reacting poses
 
 **EXAMPLE:**
 Narration: "George knelt in the freshly turned earth and placed the first sapling into the hole he'd dug that morning."
@@ -147,7 +171,7 @@ Save to `outputs/<run_id>/scenes.json`:
 ```
 
 ### THUMBNAIL PROMPT RULES
-Read `channel_style.json` (`thumbnail` section) and compose the `thumbnail_prompt` by filling in this template from `thumbnail.thumbnail_prompt_template`:
+Read the active channel style file (`thumbnail` section) and compose the `thumbnail_prompt` by filling in this template from `thumbnail.thumbnail_prompt_template`:
 
 1. Replace `HOST_DESCRIPTION` with `thumbnail.host_image_description`
 2. Replace `REACTION_TYPE` with a reaction appropriate for the video topic (surprised / excited / concerned / intrigued)

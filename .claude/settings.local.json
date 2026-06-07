@@ -29,7 +29,17 @@
       "Bash(python -m lib.pipeline --stage metadata --run-id 2026-05-08_051557_starting-a-business-vs-investing-in-the-)",
       "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\emcc1\\\\Downloads\\\\Repos\\\\remotion videos\\\\YashAiGuy\\\\idea-to-long-length-faceless-youtube-video-agent\" -Force)",
       "Bash(Select-Object Name, PSIsContainer)",
-      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\emcc1\\\\Downloads\\\\Repos\\\\remotion videos\\\\YashAiGuy\\\\idea-to-long-length-faceless-youtube-video-agent\" -File | Where-Object {$_.Name -match \"\\\\.json$|\\\\.yaml$|\\\\.yml$|config\"})"
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\emcc1\\\\Downloads\\\\Repos\\\\remotion videos\\\\YashAiGuy\\\\idea-to-long-length-faceless-youtube-video-agent\" -File | Where-Object {$_.Name -match \"\\\\.json$|\\\\.yaml$|\\\\.yml$|config\"})",
+      "Bash(Select-Object -Property Name, PSIsContainer)",
+      "Bash(Sort-Object Name)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\emcc1\\\\Downloads\\\\Repos\\\\remotion videos\\\\YashAiGuy\\\\idea-to-long-length-faceless-youtube-video-agent\\\\outputs\\\\2026-05-20_163253_are-you-too-late-to-start-investing-afte\" -Recurse | Where-Object {$_.PSIsContainer -eq $false} | Select-Object Name)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\emcc1\\\\Downloads\\\\Repos\\\\remotion videos\\\\YashAiGuy\\\\idea-to-long-length-faceless-youtube-video-agent\\\\outputs\\\\2026-05-20_163253_are-you-too-late-to-start-investing-afte\" -Recurse | Where-Object {$_.PSIsContainer -eq $false})",
+      "Bash(python -m lib.pipeline --stage tts --run-id 2026-05-22_shorts_house-vs-index-fund)",
+      "Bash(python -m lib.pipeline --stage timestamps --run-id 2026-05-22_shorts_house-vs-index-fund)",
+      "Bash(python -m lib.pipeline --stage images --run-id 2026-05-22_shorts_house-vs-index-fund)",
+      "Bash(python -m lib.pipeline --stage render --run-id 2026-05-22_shorts_house-vs-index-fund)",
+      "Bash(ffprobe -v quiet -print_format json -show_streams -show_format \"C:\\\\Users\\\\emcc1\\\\Downloads\\\\Repos\\\\remotion videos\\\\YashAiGuy\\\\idea-to-long-length-faceless-youtube-video-agent\\\\outputs\\\\2026-05-22_shorts_house-vs-index-fund\\\\final.mp4\")",
+      "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); v=[s for s in d['streams'] if s['codec_type']=='video'][0]; print\\(f'Resolution: {v[\\\\\"width\\\\\"]}x{v[\\\\\"height\\\\\"]}'\\); print\\(f'Duration: {float\\(d[\\\\\"format\\\\\"][\\\\\"duration\\\\\"]\\):.1f}s'\\); print\\(f'Size: {int\\(d[\\\\\"format\\\\\"][\\\\\"size\\\\\"]\\) // 1024 // 1024}MB'\\)\")"
     ]
   }
 }

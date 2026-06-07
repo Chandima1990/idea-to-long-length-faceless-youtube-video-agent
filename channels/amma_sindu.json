@@ -1,0 +1,149 @@
+{
+  "_readme": "Amma Sindu — Sri Lankan Sinhala song video channel. Songs are written by the user's mother. Visual style is pastel, cartoonish, and 2D/3D animation-inspired. Audio is generated externally via Suno AI and placed manually into the output folder — the TTS stage is SKIPPED for this channel. The agent's input is song lyrics (Sinhala), an optional English translation, and optional per-song style instructions. The fallback visual style is soft pastel 2D cartoon illustration.",
+
+  "reference_sample": {
+    "run_id": "",
+    "title": "",
+    "style_summary": "No reference sample yet. First production video will become the reference."
+  },
+
+  "channel": {
+    "name": "Amma Sindu",
+    "niche": "Original Sinhala songs written by a Sri Lankan mother — lyric and story videos for Facebook and YouTube",
+    "target_audience": "Sri Lankan Sinhala-speaking audience on Facebook and YouTube — families, older adults, people who appreciate original Sinhala poetry and emotional storytelling through song",
+    "tone": "warm, emotional, poetic, gentle, rooted in Sri Lankan culture and everyday life. Each video should feel like a visual story that honours the feeling of the song.",
+    "language": "Sinhala (primary). English translation provided for workflow reference only — do not use English in the visual output unless the song explicitly includes English lines.",
+    "platform": "Facebook (primary), YouTube (secondary)",
+    "captions_enabled": false
+  },
+
+  "host": {
+    "name": null,
+    "role": "No on-screen narrator or recurring presenter. This is a lyric story video channel. There is no host character.",
+    "appears_in_broll": false,
+    "broll_note": "No recurring host. Each song may have its own story characters defined per video in characters.json. Characters should be illustrated in a style consistent with the song's visual theme — soft cartoon, culturally appropriate Sri Lankan appearance, pastel or warm tones."
+  },
+
+  "audio": {
+    "source": "Suno AI — generated externally by the user",
+    "workflow_note": "SKIP the TTS stage entirely for this channel. The user will generate the song audio using Suno AI and manually place the file as narration.mp3 inside the run output folder. Once placed, proceed directly to the timestamps stage.",
+    "placement_instruction": "User places the Suno AI audio file at: outputs/<run_id>/narration.mp3. Then run: python -m lib.pipeline --stage timestamps --run-id <run_id>",
+    "tts_stage": "SKIP"
+  },
+
+  "visual_style": {
+    "base_style_name": "Soft Pastel 2D Cartoon Animation",
+    "photographic_style": "soft pastel 2D cartoon illustration, gentle animation feel, smooth rounded outlines, storybook quality",
+    "color_palette": "soft pastels — pale pink, sky blue, mint green, warm peach, soft lavender, cream white, golden yellow. Avoid stark white backgrounds and harsh contrasts.",
+    "lighting": "soft, warm, gentle ambient light. Subtle atmospheric glow or pastel gradient backgrounds are allowed and encouraged for mood.",
+    "camera": "centered storybook compositions, gentle close-ups on expressive character faces, dreamy landscape establishing shots, soft nature environments",
+    "texture": "smooth cartoon surfaces, soft rounded outlines, gentle watercolor or pastel-wash backgrounds, no sharp geometric infographic shapes",
+    "mood": "warm, emotional, nostalgic, dreamy, heartfelt, culturally familiar to Sri Lankan viewers",
+    "scene_rules": [
+      "Use soft pastel backgrounds — avoid stark white or heavy dark backgrounds unless the song's mood specifically calls for it.",
+      "Characters should have gentle, expressive cartoon faces that match the emotional tone of the lyrics.",
+      "Nature elements are strongly encouraged: flowers, birds, river, rain, moonlight, rice fields, coconut trees, temple settings.",
+      "Clothing and settings should feel culturally Sri Lankan where the lyrics or story call for it.",
+      "For devotional or religious songs: golden and warm saffron tones, lotus flowers, temple architecture, soft divine light.",
+      "For love or longing songs: soft pinks, purples, romantic natural settings at dusk or dawn.",
+      "For children or family songs: bright but soft pastels, playful rounded characters, simple joyful environments.",
+      "For nature or village life songs: earthy greens, warm browns, Sri Lankan rural landscapes, traditional elements.",
+      "The style can be overridden per song with specific instructions from the user — always read song-specific style instructions first."
+    ],
+    "style_suffix_base": "Soft pastel 2D cartoon illustration, gentle watercolor-wash atmosphere, smooth rounded outlines, warm dreamy lighting, emotionally expressive characters, Sri Lankan cultural elements where appropriate, no photorealism, no sharp geometric infographic shapes, 16:9 aspect ratio.",
+    "style_guide_note": "Visuals should feel like a gentle animated storybook that honours the feeling of the song. Style varies per song. Always read the song-specific style instruction before generating the style card."
+  },
+
+  "lyric_style": {
+    "input_format": "Song lyrics provided in Sinhala. English translation provided as a workflow reference if needed. Optional per-song style instruction also provided.",
+    "scene_mapping": "Each lyric line or couplet maps to one visual scene. Scenes should illustrate the imagery, emotion, and story of the lyrics — not simply show text on screen.",
+    "lyric_text_in_scenes": "Sinhala lyric text may appear as a styled overlay on scenes at natural lyric moments (chorus, key emotional lines). Keep text clean and readable. Do not overlay text on every scene.",
+    "structure": [
+      "intro / instrumental opening (if any)",
+      "verse 1",
+      "chorus",
+      "verse 2",
+      "chorus",
+      "bridge or interlude (if present)",
+      "final chorus",
+      "outro / fade"
+    ],
+    "scene_duration_note": "Scene durations are driven by the audio from Suno AI, not by word count. After timestamps are extracted from the audio, the rescaling stage aligns scene durations to the actual audio automatically.",
+    "no_tts_note": "Do not write a narration script. The script.md file for this channel should contain the song lyrics only, formatted line by line. Do not add stage directions, headings, or prose."
+  },
+
+  "thumbnail": {
+    "include_host": false,
+    "background_style": "soft pastel gradient background matching the song's emotional tone — warm peach and gold for devotional songs, soft pink and lavender for love or longing songs, sky blue and mint for nature or children's songs",
+    "text_area": "centered or bottom third of frame. Song title in elegant bold Sinhala script, large enough to read on mobile. English subtitle below if the song has a known English title.",
+    "accent_colors": "pastels matching the song's mood. Soft floral, leaf, or nature decorative elements framing the composition.",
+    "overall_style": "warm, inviting, emotionally resonant music video thumbnail. Soft pastel 2D cartoon illustration with the song title and a central visual representing the song's core image or feeling. Should feel gentle and beautiful, not high-contrast or aggressive.",
+    "thumbnail_prompt_template": "Facebook music video thumbnail, 16:9 aspect ratio. Soft pastel 2D cartoon illustration. SONG_MOOD_COLOR gentle gradient background. Centered composition showing SONG_CENTRAL_IMAGE that represents the core emotion or story of the song. Song title SONG_TITLE in elegant bold Sinhala-style text centered in the frame. Soft floral or nature decorative border elements. Warm dreamy atmosphere, smooth cartoon style, gentle rounded outlines, emotionally expressive, Sri Lankan cultural aesthetic, no photorealism, no harsh contrast, no finance icons."
+  },
+
+  "youtube_metadata": {
+    "_readme": "Music channel in Sinhala. Titles use the song name. Descriptions credit the songwriter and describe the song's theme briefly.",
+    "category_id": "10",
+    "default_language": "si",
+    "default_audio_language": "si",
+    "title_style": {
+      "format": "[Song Title in Sinhala] | අම්මා සිංදු",
+      "examples": [
+        "මල් පිපෙන සීතලේ | අම්මා සිංදු",
+        "ඔබ නැති රැය | අම්මා සිංදු"
+      ],
+      "rules": [
+        "Lead with the Sinhala song title.",
+        "Append the channel name in Sinhala: අම්මා සිංදු",
+        "Keep it clean and simple — no clickbait phrasing."
+      ]
+    },
+    "description_style": {
+      "format": "Song title, songwriter credit, brief theme description. Can include Sinhala lyrics.",
+      "rules": [
+        "Credit the songwriter — Amma (user's mother).",
+        "Include the song's theme, occasion, or emotion in 1-2 sentences.",
+        "Optionally include the full Sinhala lyrics in the description.",
+        "Keep the description warm and genuine — not promotional."
+      ],
+      "example": "ගීතය: [Song Title]\nගීත රචනය: [Mother's name]\n\n[Brief description of the song's theme in Sinhala]\n\n[Optional: full lyrics]"
+    },
+    "tag_style": {
+      "count": "8-12 focused tags",
+      "rules": [
+        "Include the song title as a tag.",
+        "Include sinhala song, sinhala music, amma sindu.",
+        "Add thematic tags matching the song content (e.g., sinhala love song, sinhala devotional, sinhala nature song)."
+      ]
+    },
+    "base_tags": [
+      "sinhala song",
+      "sinhala music",
+      "amma sindu",
+      "අම්මා සිංදු",
+      "sri lankan music",
+      "sinhala lyrics",
+      "new sinhala song",
+      "original sinhala song",
+      "sinhala facebook video",
+      "sinhala geetha"
+    ],
+    "localized": {
+      "use_same_title": true,
+      "use_same_description": true
+    }
+  },
+
+  "pipeline_notes": {
+    "tts_stage": "SKIP — place Suno AI audio as narration.mp3 in the output folder, then run timestamps directly.",
+    "script_stage": "Write song lyrics only (Sinhala), line by line. No prose narration. Save to outputs/<run_id>/script.md.",
+    "scenes_stage": "Map each lyric line or couplet to one visual scene. Use song-specific style if provided, otherwise fall back to visual_style defaults.",
+    "article_stage": "SKIP — this channel does not publish Medium articles.",
+    "article_images_stage": "SKIP — not applicable.",
+    "input_from_user": [
+      "Song lyrics in Sinhala (required)",
+      "English translation (optional — for agent reference only)",
+      "Per-song visual style instruction (optional — overrides visual_style defaults)"
+    ]
+  }
+}

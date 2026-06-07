@@ -1,14 +1,14 @@
 # Article Writer — Medium Post
 
 ## Input
-- `channel_style.json` — **Read this first.** It defines the host's personality and narration style. The article tone must match the host's voice.
+- `channels/<CHANNEL>.json (path from CHANNEL_STYLE_PATH in lib/config.py)` — **Read this first.** It defines the host's personality and narration style. The article tone must match the host's voice.
 - `outputs/<run_id>/script.md` — the narration script (source of truth for facts/claims)
 - `outputs/<run_id>/scenes.json` — title, description, tags
 - `outputs/<run_id>/style.json` — visual style for image prompts
 - `outputs/<run_id>/viral_dna.json` — (if exists) hook template and psychological triggers
 
-## Channel Voice (from channel_style.json)
-Extract `host.personality` and `host.narration_style` from `channel_style.json`. The article must read like this same host wrote it — same conversational warmth, same sentence rhythm, same use of "you" to address the reader. It is the script's written cousin, not a different voice.
+## Channel Voice (from channels/<CHANNEL>.json (path from CHANNEL_STYLE_PATH in lib/config.py))
+Extract `host.personality` and `host.narration_style` from `channels/<CHANNEL>.json (path from CHANNEL_STYLE_PATH in lib/config.py)`. The article must read like this same host wrote it — same conversational warmth, same sentence rhythm, same use of "you" to address the reader. It is the script's written cousin, not a different voice.
 
 ## Output Files
 

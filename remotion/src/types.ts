@@ -16,6 +16,9 @@ export interface SceneData {
   narration_text: string;
   duration: number;
   image_prompt: string;
+  video_src?: string;
+  video_duration?: number;
+  video_volume?: number;
   shot_type: ShotType;
   ken_burns: string;
   transition: TransitionType;
